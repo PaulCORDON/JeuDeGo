@@ -1,5 +1,6 @@
 package com.ensim.jeuGo;
 
-public class Plateau {
 
+public class Plateau {
+	/*coucou*/
 }
