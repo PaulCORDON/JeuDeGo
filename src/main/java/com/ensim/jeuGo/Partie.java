@@ -9,6 +9,7 @@ public class Partie {
 	Boolean isFinish;
 	int tour;
 	
+	
 	Partie(){	//initialisation de la partie
 		j1 = new Joueur("blanc");
 		j2 = new Joueur("noir");
@@ -28,7 +29,17 @@ public class Partie {
 			}
 			else jCourant=j1;
 		}
+		
+		
+		
+		
+		
+		j1.score=CompterPoint(j1);
+		j2.score=CompterPoint(j2);
 	}
+	
+	
+	
 	
 	public void JouerTour(Joueur jc, int ligne, int colonne){
 		
@@ -38,7 +49,16 @@ public class Partie {
 			
 			plateau.contenuPlateau[ligne][colonne].contenu=jc.couleur;
 		}
+		
 	}
 	
 	
+	
+	public int CompterPoint(Joueur j) {
+		int score=0;
+		
+		
+		
+		return score;
+	}
 }
