@@ -1,5 +1,8 @@
 package com.ensim.jeuGo;
 
 public class Partie {
-int toti;
+	Joueur j1 = new Joueur();
+	Joueur j2 = new Joueur();
+	Plateau plateau = new Plateau();
+	
 }
