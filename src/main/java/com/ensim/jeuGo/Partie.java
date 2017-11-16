@@ -5,4 +5,8 @@ public class Partie {
 	Joueur j2 = new Joueur();
 	Plateau plateau = new Plateau();
 	
+	
+	public void PoserPion(int ligne, int colonne){
+		
+	}
 }

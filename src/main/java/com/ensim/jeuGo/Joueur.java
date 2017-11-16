@@ -1,5 +1,12 @@
 package com.ensim.jeuGo;
 
 public class Joueur {
-	//ca marche
+	
+	String Couleur;
+	
+	Joueur(String couleur){
+		
+	}
+	
+
 }
