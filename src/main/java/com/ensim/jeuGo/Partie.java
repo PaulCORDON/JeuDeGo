@@ -21,7 +21,7 @@ public class Partie {
 	
 	public void JouerPartie() {
 		while(!isFinish) {
-			JouerTour(jCourant, ligne, colonne );
+			/*JouerTour(jCourant, ligne, colonne );*/
 			tour++;
 			
 			if(tour%2==0) {
@@ -41,7 +41,7 @@ public class Partie {
 	
 	
 	
-	public void JouerTour(Joueur jc, int ligne, int colonne){
+	/*public void JouerTour(Joueur jc, int ligne, int colonne){
 		
 		jc=jCourant;
 		
@@ -50,7 +50,7 @@ public class Partie {
 			plateau.contenuPlateau[ligne][colonne].contenu=jc.couleur;
 		}
 		
-	}
+	}*/
 	
 	
 	

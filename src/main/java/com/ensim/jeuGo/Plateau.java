@@ -21,7 +21,7 @@ public class Plateau {
 	
 	
 	
-	public Boolean VerifCoupValide(int ligne, int colonne) {
+	/*public Boolean VerifCoupValide(int ligne, int colonne) {
 		return true;
 	}
 	
@@ -32,5 +32,5 @@ public class Plateau {
 		
 		return false;
 		
-	}
+	}*/
 }
