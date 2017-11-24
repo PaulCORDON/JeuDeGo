@@ -61,8 +61,9 @@ public class Plateau {
 		
 		return goban;
 	}
-	public Boolean VerifIlSePasseQqChose(int ligne, int colonne) {		
+	public void VerifIlSePasseQqChose(int ligne, int colonne) { //dans cette methode on verifie s'il se passe qq chose. Si oui, on effectue les changement sur le plateau
+		 
 		
-		return false;		
+			
 	}
 }
