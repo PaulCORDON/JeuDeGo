@@ -1,7 +1,9 @@
 package com.ensim.jeuGo;
 
+import java.util.Scanner;
+
 public class Partie {
-	
+	Scanner sc = new Scanner(System.in);
 	Joueur j1;
 	Joueur j2;
 	Joueur jCourant;
@@ -14,38 +16,25 @@ public class Partie {
 		j1 = new Joueur("blanc");
 		j2 = new Joueur("noir");
 		jCourant= j2;
-		plateau = new Plateau();
+		plateau = new Plateau(this);
 		isFinish=false;
 		tour=0;
+		System.out.println(plateau.toString());
 	}
+	
 	
 	public void JouerPartie() {
 		while(!isFinish) {
-			/*JouerTour(jCourant, ligne, colonne );*/
+
+			JouerTour();
+			System.out.println(plateau.toString());
 			tour++;
 			
 			if(tour%2==0) {
 				jCourant=j2;
 			}
 			else jCourant=j1;
-			
-			
-			
-			if(!PasserTour(jCourant)) { //on verifie si le joueur courant passe son tour. Si non, on joue
-				
-				
-				
-				
-			}
-			else { //si le joueur courant passe son tour on verifie que les deux joueurs n'ont pas passé leur tour consécutivement. Si cest le cas la partie se termine
-				if(j1.passe==true && j2.passe==true) isFinish=true;
-			}
-		}
-		
-		
-		
-		
-		
+		}		
 		j1.score=CompterPoint(j1);
 		j2.score=CompterPoint(j2);
 	}
@@ -53,26 +42,26 @@ public class Partie {
 	
 	
 	
-	/*public void JouerTour(Joueur jc, int ligne, int colonne){
-		
-		jc=jCourant;
-		jCourant.passe=false;
-		
+	public void JouerTour(){
+			int ligne;
+			int colonne;
+			System.out.println("sur quelle ligne voulez vous jouer :");
+			
+			while((ligne=sc.nextInt())>18 || ligne<0) {
+				System.out.println("le nombre de lignes est compris entre 0 et 18 veuillez resaisir la ligne :");
+				
+			}
+			System.out.println("sur quelle colonne voulez vous jouer :");
+			while((colonne=sc.nextInt())>18 || colonne<0) {
+				System.out.println("le nombre de colonnes est compris entre 0 et 18 veuillez resaisir la ligne :");
+				
+			}
+					
 		if(plateau.VerifCoupValide(ligne, colonne)) {
 			
-			plateau.contenuPlateau[ligne][colonne].contenu=jc.couleur;
+			plateau.contenuPlateau.get(ligne).get(colonne).contenu=jCourant.couleur;
 		}
 		
-	}*/
-	
-	
-	
-	public Boolean PasserTour(Joueur j) {
-		Boolean passer= false;
-		
-		//il y aura un bouton "passer" dans l'interface et si on clique dessus passer = true
-		j.passe=true;
-		return passer;
 	}
 	
 	
@@ -80,14 +69,15 @@ public class Partie {
 	public int CompterPoint(Joueur j) {
 		int score=0;
 		
-		/*regle trouvee sur internet:
-		 * 
-		 * La partie s'arrête lorsque les deux joueurs passent consécutivement. On compte alors les points. 
-		 * Chaque intersection du territoire d'un joueur lui rapporte un point, ainsi que chacune de ses pierres encore présentes sur le goban.
-		 * 
-		 */
 		
 		
 		return score;
+	}
+	public static void main(String[] args) {
+		Partie p =new Partie();
+		
+		p.JouerPartie();
+		
+		
 	}
 }

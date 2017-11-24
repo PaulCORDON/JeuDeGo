@@ -1,44 +1,65 @@
 package com.ensim.jeuGo;
 
+
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Plateau {
+
+	public ArrayList<ArrayList<Intersection>> contenuPlateau= new ArrayList<ArrayList<Intersection>>();
+	Partie p;
 	
-	public Intersection contenuPlateau[][]= new Intersection [19][19];
-	
-	
-	public Plateau(){
-		
-		
-		for(Intersection[] ligne:contenuPlateau) {
-			for(Intersection intersection:ligne)
-			intersection.contenu="vide";
+	public Plateau(Partie pa){	
+		for(int i=0;i<21;i++) {			
+			contenuPlateau.add(new ArrayList<Intersection>());
+			for(int j=0;j<21;j++) {
+				if(i==0||i==20||j==0||j==20) {
+					contenuPlateau.get(i).add(new Intersection("bord"));
+				}
+				else {
+					contenuPlateau.get(i).add(new Intersection("vide"));
+				}
+				
+			}
 		}
+		p=pa;
 	}
 	
-	
-	
-	
-	
-	public Boolean VerifCoupValide(int ligne, int colonne) {
-		Boolean valide=false;
+	public Boolean VerifCoupValide(int ligne,int colonne) {
+
+		if(contenuPlateau.get(ligne).get(colonne).contenu.equals("vide")) {
+			return true;
+		}
+		else {
+			System.out.println("il y a déja une pierre ici");
+			p.JouerTour();
+			return false;
+		}
 		
-		if(ligne>=0 && ligne<=19 && colonne>=0 && colonne<=19) {
-			if(contenuPlateau[ligne][colonne].contenu.equals("vide")) {
-				valide=true;
+	}
+	
+	public String toString() {
+		String goban="";
+		for(ArrayList<Intersection> ligne:contenuPlateau) {
+			System.out.print("\n");
+			for(Intersection intersection:ligne) {
+				if(intersection.contenu.equals("vide")) {
+					System.out.print(" +");
+				}
+				else if(intersection.contenu.equals("blanc")){
+					System.out.print(" A");
+				}
+				else {
+					System.out.print(" B");
+				}
+				
 			}
 		}
 		
-		return valide;
+		return goban;
 	}
-	
-	
-	/*public void VerifIlSePasseQqChose(int ligne, int colonne) { //dans cette methode on verifie s'il se passe qq chose. Si oui, on effectue les changement sur le plateau
-	
+	public Boolean VerifIlSePasseQqChose(int ligne, int colonne) {		
+		return false;
 		
-		
-		
-		
-	}*/
+	}
 }
