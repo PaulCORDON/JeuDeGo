@@ -28,6 +28,18 @@ public class Partie {
 				jCourant=j2;
 			}
 			else jCourant=j1;
+			
+			
+			
+			if(!PasserTour(jCourant)) { //on verifie si le joueur courant passe son tour. Si non, on joue
+				
+				
+				
+				
+			}
+			else { //si le joueur courant passe son tour on verifie que les deux joueurs n'ont pas passé leur tour consécutivement. Si cest le cas la partie se termine
+				if(j1.passe==true && j2.passe==true) isFinish=true;
+			}
 		}
 		
 		
@@ -44,6 +56,7 @@ public class Partie {
 	/*public void JouerTour(Joueur jc, int ligne, int colonne){
 		
 		jc=jCourant;
+		jCourant.passe=false;
 		
 		if(plateau.VerifCoupValide(ligne, colonne)) {
 			
@@ -54,9 +67,25 @@ public class Partie {
 	
 	
 	
+	public Boolean PasserTour(Joueur j) {
+		Boolean passer= false;
+		
+		//il y aura un bouton "passer" dans l'interface et si on clique dessus passer = true
+		j.passe=true;
+		return passer;
+	}
+	
+	
+	
 	public int CompterPoint(Joueur j) {
 		int score=0;
 		
+		/*regle trouvee sur internet:
+		 * 
+		 * La partie s'arrête lorsque les deux joueurs passent consécutivement. On compte alors les points. 
+		 * Chaque intersection du territoire d'un joueur lui rapporte un point, ainsi que chacune de ses pierres encore présentes sur le goban.
+		 * 
+		 */
 		
 		
 		return score;
