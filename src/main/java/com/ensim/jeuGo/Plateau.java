@@ -43,7 +43,10 @@ public class Plateau {
 		for(ArrayList<Intersection> ligne:contenuPlateau) {
 			System.out.print("\n");
 			for(Intersection intersection:ligne) {
-				if(intersection.contenu.equals("vide")) {
+				if(intersection.contenu.equals("bord")) {
+					System.out.print(" O");
+				}
+				else if(intersection.contenu.equals("vide")) {
 					System.out.print(" +");
 				}
 				else if(intersection.contenu.equals("blanc")){
@@ -59,7 +62,7 @@ public class Plateau {
 		return goban;
 	}
 	public Boolean VerifIlSePasseQqChose(int ligne, int colonne) {		
-		return false;
 		
+		return false;		
 	}
 }

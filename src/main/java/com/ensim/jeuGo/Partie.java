@@ -7,6 +7,7 @@ public class Partie {
 	Joueur j1;
 	Joueur j2;
 	Joueur jCourant;
+	Joueur jAttendant;
 	Plateau plateau;
 	Boolean isFinish;
 	int tour;
@@ -16,6 +17,7 @@ public class Partie {
 		j1 = new Joueur("blanc");
 		j2 = new Joueur("noir");
 		jCourant= j2;
+		jAttendant=j1;
 		plateau = new Plateau(this);
 		isFinish=false;
 		tour=0;
@@ -31,10 +33,15 @@ public class Partie {
 			tour++;
 			
 			if(tour%2==0) {
+				jAttendant=jCourant;
 				jCourant=j2;
 			}
-			else jCourant=j1;
-		}		
+			else {
+				jAttendant=jCourant;
+				jCourant=j1;
+			}
+		}
+		System.out.println("Partie terminée.");
 		j1.score=CompterPoint(j1);
 		j2.score=CompterPoint(j2);
 	}
@@ -45,23 +52,34 @@ public class Partie {
 	public void JouerTour(){
 			int ligne;
 			int colonne;
-			System.out.println("sur quelle ligne voulez vous jouer :");
-			
-			while((ligne=sc.nextInt())>18 || ligne<0) {
-				System.out.println("le nombre de lignes est compris entre 0 et 18 veuillez resaisir la ligne :");
-				
+			System.out.println(jCourant.couleur+"Voulez-vous passez votre tour? 0=oui 1=non");
+			if(sc.nextInt()==0) {
+				jCourant.aPasse=true;
+				if(jAttendant.aPasse==true) {
+					isFinish=true;
+				}
 			}
-			System.out.println("sur quelle colonne voulez vous jouer :");
-			while((colonne=sc.nextInt())>18 || colonne<0) {
-				System.out.println("le nombre de colonnes est compris entre 0 et 18 veuillez resaisir la ligne :");
+			else {
+				jCourant.aPasse=false;
+					System.out.println(jCourant.couleur+" sur quelle ligne voulez vous jouer :");
 				
+				while((ligne=sc.nextInt())>18 || ligne<0) {
+					System.out.println("Le nombre de lignes est compris entre 0 et 18 veuillez resaisir la ligne :");
+					
+				}
+				System.out.println(jCourant.couleur+" sur quelle colonne voulez vous jouer :");
+				while((colonne=sc.nextInt())>18 || colonne<0) {
+					System.out.println("Le nombre de colonnes est compris entre 0 et 18 veuillez resaisir la ligne :");
+					
+				}
+						
+				if(plateau.VerifCoupValide(ligne, colonne)) {
+				
+					plateau.contenuPlateau.get(ligne).get(colonne).contenu=jCourant.couleur;
+				}
+
 			}
 					
-		if(plateau.VerifCoupValide(ligne, colonne)) {
-			
-			plateau.contenuPlateau.get(ligne).get(colonne).contenu=jCourant.couleur;
-		}
-		
 	}
 	
 	
