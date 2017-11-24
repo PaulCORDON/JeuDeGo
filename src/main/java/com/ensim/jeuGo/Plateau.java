@@ -21,16 +21,24 @@ public class Plateau {
 	
 	
 	
-	/*public Boolean VerifCoupValide(int ligne, int colonne) {
-		return true;
+	public Boolean VerifCoupValide(int ligne, int colonne) {
+		Boolean valide=false;
+		
+		if(ligne>=0 && ligne<=19 && colonne>=0 && colonne<=19) {
+			if(contenuPlateau[ligne][colonne].contenu.equals("vide")) {
+				valide=true;
+			}
+		}
+		
+		return valide;
 	}
 	
 	
-	public Boolean VerifIlSePasseQqChose(int ligne, int colonne) {
+	/*public void VerifIlSePasseQqChose(int ligne, int colonne) { //dans cette methode on verifie s'il se passe qq chose. Si oui, on effectue les changement sur le plateau
 	
 		
 		
-		return false;
+		
 		
 	}*/
 }
