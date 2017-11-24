@@ -76,6 +76,7 @@ public class Partie {
 				if(plateau.VerifCoupValide(ligne, colonne)) {
 				
 					plateau.contenuPlateau.get(ligne).get(colonne).contenu=jCourant.couleur;
+					plateau.VerifIlSePasseQqChose();
 				}
 
 			}

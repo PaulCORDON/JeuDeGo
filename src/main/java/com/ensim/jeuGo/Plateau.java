@@ -52,7 +52,7 @@ public class Plateau {
 				else if(intersection.contenu.equals("blanc")){
 					System.out.print(" A");
 				}
-				else {
+				else if(intersection.contenu.equals("noir")){
 					System.out.print(" B");
 				}
 				
@@ -61,9 +61,35 @@ public class Plateau {
 		
 		return goban;
 	}
-	public void VerifIlSePasseQqChose(int ligne, int colonne) { //dans cette methode on verifie s'il se passe qq chose. Si oui, on effectue les changement sur le plateau
+	
+	
+	public void VerifIlSePasseQqChose() { //dans cette methode on verifie s'il se passe qq chose. Si oui, on effectue les changement sur le plateau
 		 
 		
-			
+		 /*verif pour un pion entouré par 4 pions adverses*/
+		 for (int i=0; i<=20; i++) {
+			 for(int j=0; j<=20; j++) {
+		 
+				 if(contenuPlateau.get(i).get(j).contenu.equals("noir"))
+					 	if(contenuPlateau.get(i+1).get(j).contenu.equals("blanc")) 
+					 		if(contenuPlateau.get(i).get(j+1).contenu.equals("blanc"))
+					 			if(contenuPlateau.get(i-1).get(j).contenu.equals("blanc"))
+					 				if(contenuPlateau.get(i).get(j-1).contenu.equals("blanc"))
+					 					contenuPlateau.get(i).get(j).contenu="vide";
+				 
+				 if(contenuPlateau.get(i).get(j).contenu.equals("blanc"))
+					 	if(contenuPlateau.get(i+1).get(j).contenu.equals("noir")) 
+					 		if(contenuPlateau.get(i).get(j+1).contenu.equals("noir"))
+					 			if(contenuPlateau.get(i-1).get(j).contenu.equals("noir"))
+					 				if(contenuPlateau.get(i).get(j-1).contenu.equals("noir"))
+					 					contenuPlateau.get(i).get(j).contenu="vide";
+				 
+			 }
+		 }
+		 
 	}
+		 	
+	
+	
+	
 }
