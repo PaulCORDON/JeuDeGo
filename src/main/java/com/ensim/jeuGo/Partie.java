@@ -63,12 +63,12 @@ public class Partie {
 				jCourant.aPasse=false;
 					System.out.println(jCourant.couleur+" sur quelle ligne voulez vous jouer :");
 				
-				while((ligne=sc.nextInt())>18 || ligne<0) {
+				while((ligne=sc.nextInt())>19 || ligne<1) {
 					System.out.println("Le nombre de lignes est compris entre 0 et 18 veuillez resaisir la ligne :");
 					
 				}
 				System.out.println(jCourant.couleur+" sur quelle colonne voulez vous jouer :");
-				while((colonne=sc.nextInt())>18 || colonne<0) {
+				while((colonne=sc.nextInt())>19 || colonne<1) {
 					System.out.println("Le nombre de colonnes est compris entre 0 et 18 veuillez resaisir la ligne :");
 					
 				}

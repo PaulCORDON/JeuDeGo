@@ -6,4 +6,9 @@ public class Intersection {
 	public Intersection(String txt) {
 		contenu=txt;
 	}
+	public int calculLiberte() {
+		int lib=4;
+		
+		return lib;
+	}
 }
