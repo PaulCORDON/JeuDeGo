@@ -63,10 +63,32 @@ public class Plateau {
 	}
 	
 	
-	public void VerifIlSePasseQqChose() { //dans cette methode on verifie s'il se passe qq chose. Si oui, on effectue les changement sur le plateau
-		 
+	public void VerifIlSePasseQqChose(Joueur j, int ligne, int colonne) { //dans cette methode on verifie s'il se passe qq chose. Si oui, on effectue les changement sur le plateau
+		  String couleur= j.couleur;
 		
-		 /*verif pour un pion entouré par 4 pions adverses*/
+		  if(couleur.equals("blanc")) {
+			  
+			  
+			  /*****pseudo code******
+			   * 
+			   * on vérifie les 4 voisins
+			   * tant que( pas libre ou pas capturé)
+			   *		on prend les voisin noir
+			   * 		on verifie leurs 3 autres voisins (on enleve celui par le quel est deja passé)
+			   * 
+			   * 		si un seul voisin est vide: libre!
+			   * 
+			   * 		si tous les voisins sont blancs: capturé!
+			   * 
+			   */
+		  }
+		  
+		  
+		  
+		  
+		  
+		  /*
+		 //verif pour un pion entouré par 4 pions adverses
 		 for (int i=0; i<=20; i++) {
 			 for(int j=0; j<=20; j++) {
 		 
@@ -86,10 +108,14 @@ public class Plateau {
 				 
 			 }
 		 }
+		 */
 		 
 	}
 		 	
 	
 	
-	
 }
+	
+	
+	
+
