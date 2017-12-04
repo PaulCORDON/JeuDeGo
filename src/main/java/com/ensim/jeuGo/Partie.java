@@ -1,5 +1,11 @@
 package com.ensim.jeuGo;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Scanner;
 
 public class Partie {
@@ -92,6 +98,38 @@ public class Partie {
 		
 		return score;
 	}
+	
+	public void SauvgarderPartie() {
+		XMLEncoder encoder = null;
+		try {
+		      encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("partie.xml")));
+		      encoder.writeObject(this);
+		      encoder.flush();
+		    } catch (final java.io.IOException e) {
+		      e.printStackTrace();
+		    } finally {
+		      if (encoder != null) {
+		        encoder.close();
+		      }
+		    }
+		
+	}
+	public void ChargerPartie() {
+		 XMLDecoder decoder = null;
+		    try {
+		      decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("partie.xml")));
+		      final Partie partie = (Partie) decoder.readObject();
+		      System.out.println(partie);
+		    } catch (final Exception e) {
+		      e.printStackTrace();
+		    } finally {
+		      if (decoder != null) {
+		        decoder.close();
+		      }
+		    }
+		
+	}
+	
 	public static void main(String[] args) {
 		Partie p =new Partie();
 		
