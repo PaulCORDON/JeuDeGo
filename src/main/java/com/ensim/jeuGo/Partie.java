@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Scanner;
 
+
+
 public class Partie {
 	Scanner sc = new Scanner(System.in);
 	Joueur j1;
@@ -19,7 +21,7 @@ public class Partie {
 	int tour;
 	
 	
-	Partie(){	//initialisation de la partie
+	public Partie(){	//initialisation de la partie
 		j1 = new Joueur("blanc");
 		j2 = new Joueur("noir");
 		jCourant= j2;
@@ -34,6 +36,9 @@ public class Partie {
 	public void JouerPartie() {
 		while(!isFinish) {
 
+			
+			
+			
 			JouerTour();
 			System.out.println(plateau.toString());
 			tour++;

@@ -74,7 +74,7 @@ public class Plateau {
 			   * 
 			   * on vérifie les 4 voisins
 			   * tant que( pas libre ou pas capturé)
-			   *		on prend les voisin noir
+			   *		on prend les voisins noir
 			   * 		on verifie leurs 3 autres voisins (on enleve celui par le quel est deja passé)
 			   * 
 			   * 		si un seul voisin est vide: libre!
