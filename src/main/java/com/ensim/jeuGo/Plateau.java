@@ -8,12 +8,13 @@ public class Plateau {
 
 	public ArrayList<ArrayList<Intersection>> contenuPlateau= new ArrayList<ArrayList<Intersection>>();
 	Partie p;
+	int tailleGrille=12;
 	
 	public Plateau(Partie pa){	
-		for(int i=0;i<21;i++) {			
+		for(int i=0;i<tailleGrille;i++) {			
 			contenuPlateau.add(new ArrayList<Intersection>());
-			for(int j=0;j<21;j++) {
-				if(i==0||i==20||j==0||j==20) {
+			for(int j=0;j<tailleGrille;j++) {
+				if(i==0||i==tailleGrille-1||j==0||j==tailleGrille-1) {
 					contenuPlateau.get(i).add(new Intersection("bord"));
 				}
 				else {
@@ -89,8 +90,8 @@ public class Plateau {
 		  
 		  /*
 		 //verif pour un pion entouré par 4 pions adverses
-		 for (int i=0; i<=20; i++) {
-			 for(int j=0; j<=20; j++) {
+		 for (int i=0; i<=tailleGrille-1; i++) {
+			 for(int j=0; j<=tailleGrille-1; j++) {
 		 
 				 if(contenuPlateau.get(i).get(j).contenu.equals("noir"))
 					 	if(contenuPlateau.get(i+1).get(j).contenu.equals("blanc")) 

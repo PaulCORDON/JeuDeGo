@@ -68,14 +68,16 @@ public class Partie {
 			else {
 				jCourant.aPasse=false;
 					System.out.println(jCourant.couleur+" sur quelle ligne voulez vous jouer :");
+					
+
 				
-				while((ligne=sc.nextInt())>19 || ligne<1) {
-					System.out.println("Le nombre de lignes est compris entre 0 et 18 veuillez resaisir la ligne :");
+				while((ligne=sc.nextInt())>=plateau.tailleGrille-1 || ligne<1) {
+					System.out.println("Le nombre de lignes est compris entre 0 et "+(plateau.tailleGrille-2)+" veuillez resaisir la ligne :");
 					
 				}
 				System.out.println(jCourant.couleur+" sur quelle colonne voulez vous jouer :");
-				while((colonne=sc.nextInt())>19 || colonne<1) {
-					System.out.println("Le nombre de colonnes est compris entre 0 et 18 veuillez resaisir la ligne :");
+				while((colonne=sc.nextInt())>=plateau.tailleGrille-1 || colonne<1) {
+					System.out.println("Le nombre de colonnes est compris entre 0 et "+(plateau.tailleGrille-2)+" veuillez resaisir la colonne :");
 					
 				}
 						
