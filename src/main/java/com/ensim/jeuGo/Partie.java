@@ -68,11 +68,13 @@ public class Partie {
 	public void JouerTour(){
 			int ligne;
 			int colonne;
-			System.out.println(jCourant.couleur+"Voulez-vous passez votre tour? 0=oui 1=non");
+			System.out.println(jCourant.couleur+" Voulez-vous passez votre tour? 0=oui 1=non");
 			if(sc.nextInt()==0) {
+				logger.info("Joueur "+jCourant.couleur+"a passer");
 				jCourant.aPasse=true;
 				if(jAttendant.aPasse==true) {
 					isFinish=true;
+					logger.info("La partie est finie car les deux joueurs ont passé");
 				}
 			}
 			else {
