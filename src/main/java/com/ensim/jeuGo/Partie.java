@@ -1,18 +1,25 @@
 package com.ensim.jeuGo;
 
+
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.chainsaw.Main;
 
 
 
 public class Partie {
-	Logger logger = Logger . getLogger ( Partie. class . getName ());
+	Logger logger = Logger . getLogger ( Main. class . getName ());
+
+	
 	Scanner sc = new Scanner(System.in);
 	Joueur j1;
 	Joueur j2;
@@ -58,8 +65,15 @@ public class Partie {
 		logger.info ("La Partie est terminée");
 		
 		System.out.println("Partie terminée.");
-		j1.score=CompterPoint(j1);
-		j2.score=CompterPoint(j2);
+		/*j1.score=CompterPoint(j1);
+		j2.score=CompterPoint(j2);*/
+		ArrayList<Joueur> joueur = new ArrayList<Joueur>();
+		j1.score=12;
+		j2.score=2;
+		joueur.add(j1);
+		joueur.add(j2);
+		Collections.sort(joueur, new ComparatorJoueur());
+		System.out.println("le gagnant est "+ joueur.get(0).couleur);		
 	}
 	
 	
@@ -70,7 +84,7 @@ public class Partie {
 			int colonne;
 			System.out.println(jCourant.couleur+" Voulez-vous passez votre tour? 0=oui 1=non");
 			if(sc.nextInt()==0) {
-				logger.info("Joueur "+jCourant.couleur+"a passer");
+				logger.info("Joueur "+jCourant.couleur+" a passer");
 				jCourant.aPasse=true;
 				if(jAttendant.aPasse==true) {
 					isFinish=true;
@@ -145,6 +159,8 @@ public class Partie {
 	}
 	
 	public static void main(String[] args) {
+		Logger logger = Logger . getLogger ( Main. class . getName ());
+		logger.info ("La Partie va commence.");
 		Partie p =new Partie();
 		
 		p.JouerPartie();
