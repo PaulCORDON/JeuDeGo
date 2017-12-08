@@ -7,10 +7,12 @@ import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 
 
 public class Partie {
+	Logger logger = Logger . getLogger ( Partie. class . getName ());
 	Scanner sc = new Scanner(System.in);
 	Joueur j1;
 	Joueur j2;
@@ -22,6 +24,7 @@ public class Partie {
 	
 	
 	public Partie(){	//initialisation de la partie
+		logger.info ("La Partie commence.");
 		j1 = new Joueur("blanc");
 		j2 = new Joueur("noir");
 		jCourant= j2;
@@ -52,6 +55,8 @@ public class Partie {
 				jCourant=j1;
 			}
 		}
+		logger.info ("La Partie est terminée");
+		
 		System.out.println("Partie terminée.");
 		j1.score=CompterPoint(j1);
 		j2.score=CompterPoint(j2);
