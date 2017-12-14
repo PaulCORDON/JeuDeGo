@@ -14,9 +14,6 @@ import java.util.Scanner;
 import org.apache.log4j.Logger;
 import org.apache.log4j.chainsaw.Main;
 
-import application.Goban;
-import javafx.scene.control.Label;
-
 
 
 public class Partie {
@@ -26,28 +23,12 @@ public class Partie {
 	Scanner sc = new Scanner(System.in);
 	Joueur j1;
 	Joueur j2;
-	private Joueur jCourant;
-	Label info;
-	private Joueur jAttendant;	
+	Joueur jCourant;
+	Joueur jAttendant;
 	Plateau plateau;
 	Boolean isFinish;
 	int tour;
-	public Joueur getjAttendant() {
-		return jAttendant;
-	}
-
-
-	public void setjAttendant(Joueur jAttendant) {
-		this.jAttendant = jAttendant;
-	}
-	public Joueur getjCourant() {
-		return jCourant;
-	}
-
-
-	public void setjCourant(Joueur jCourant) {
-		this.jCourant = jCourant;
-	}
+	
 	
 	public Partie(){	//initialisation de la partie
 		logger.info ("La Partie commence.");
@@ -58,57 +39,84 @@ public class Partie {
 		plateau = new Plateau(this);
 		isFinish=false;
 		tour=0;
-		info=Goban.Info;
+		System.out.println(plateau.toString());
 	}
 	
 	
 	public void JouerPartie() {
+		while(!isFinish) {
+
 			
-	}
-	
-	public void changerJoueur() {
-		logger.info("Le joueur courant change");
-		if(jCourant==j1) {
-			jCourant=j2;
-			jAttendant=j1;
-		}
-		else {
-			jCourant=j1;
-			jAttendant=j2;
-		}
-	}
-	public void passerTour() {
-		jCourant.setaPasse(true);
-		if(jAttendant.isaPasse()==true) {
-			isFinish=true;
-			logger.info("La partie est finie car les deux joueurs ont passé");
-		}
-		else {
-			changerJoueur();
-		}
-		
-	}
-	
-	public void JouerTour(String abs,String ord){
-			logger.info("coucou");
-			Integer ligne=new Integer(ord);
-			Integer colonne=new Integer(abs);		
-			jCourant.setaPasse(false);				
-			if(ligne<1||ligne>19||colonne<1||colonne>19) {
-				info.setText("Les valeurs saisient ne sont pas valide.");
-				logger.info("les coordonnees ne sont pas valides");
-				
-			}
-			else if(plateau.VerifCoupValide(ligne, colonne)) {
-				logger.info("on verifie si le coup est valide");
-				plateau.contenuPlateau.get(ligne).get(colonne).contenu=jCourant.getCouleur();
-				plateau.VerifIlSePasseQqChose(jCourant, ligne, colonne);
-				changerJoueur();
+			
+			
+			JouerTour();
+			System.out.println(plateau.toString());
+			tour++;
+			
+			if(tour%2==0) {
+				jAttendant=jCourant;
+				jCourant=j2;
 			}
 			else {
-				info.setText("Le coup n'est pas valide.");
-				logger.info("Le coup n'est pas valide.");
+				jAttendant=jCourant;
+				jCourant=j1;
 			}
+		}
+		logger.info ("La Partie est terminée");
+		
+		System.out.println("Partie terminée.");
+		/*j1.score=CompterPoint(j1);
+		j2.score=CompterPoint(j2);*/
+		ArrayList<Joueur> joueur = new ArrayList<Joueur>();
+		j1.setScore(12);
+		j2.setScore(2);
+		joueur.add(j1);
+		joueur.add(j2);
+		Collections.sort(joueur, new ComparatorJoueur());
+		System.out.println("le gagnant est "+ joueur.get(0).getCouleur());		
+	}
+	
+	
+	
+	
+	public void JouerTour(){
+			int ligne;
+			int colonne;
+			System.out.println(jCourant.getCouleur()+" Voulez-vous passez votre tour? 0=oui 1=non");
+			if(sc.nextInt()==0) {
+				logger.info("Joueur "+jCourant.getCouleur()+" a passer");
+				jCourant.setaPasse(true);
+				if(jAttendant.isaPasse()==true) {
+					isFinish=true;
+					logger.info("La partie est finie car les deux joueurs ont passé");
+				}
+			}
+			else {
+				jCourant.setaPasse(false);
+					System.out.println(jCourant.getCouleur()+" sur quelle ligne voulez vous jouer :");
+					
+
+				
+				while((ligne=sc.nextInt())>=plateau.tailleGrille-1 || ligne<1) {
+					System.out.println("Le nombre de lignes est compris entre 0 et "+(plateau.tailleGrille-2)+" veuillez resaisir la ligne :");
+					
+				}
+				System.out.println(jCourant.getCouleur()+" sur quelle colonne voulez vous jouer :");
+				while((colonne=sc.nextInt())>=plateau.tailleGrille-1 || colonne<1) {
+					System.out.println("Le nombre de colonnes est compris entre 0 et "+(plateau.tailleGrille-2)+" veuillez resaisir la colonne :");
+					
+				}
+						
+				if(plateau.VerifCoupValide(jCourant, ligne, colonne)) {
+				
+					plateau.contenuPlateau.get(ligne).get(colonne).contenu=jCourant.getCouleur();
+					plateau.VerifIlSePasseQqChose(jCourant, ligne, colonne);
+				}
+				else {
+					System.out.println("coup invalide");
+				}
+			}
+					
 	}
 	
 	
@@ -152,4 +160,13 @@ public class Partie {
 		
 	}
 	
+	public static void main(String[] args) {
+		Logger logger = Logger . getLogger ( Main. class . getName ());
+		logger.info ("La Partie va commence.");
+		Partie p =new Partie();
+		
+		p.JouerPartie();
+		
+		
+	}
 }
