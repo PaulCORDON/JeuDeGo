@@ -27,16 +27,33 @@ public class Plateau {
 		p=pa;
 	}
 	
-	public Boolean VerifCoupValide(int ligne,int colonne) {
+	public Boolean VerifCoupValide(Joueur j, int ligne,int colonne) {
 
+		String couleur= j.getCouleur();
+		String couleurAdverse=null;  if(couleur.equals("blanc")) couleurAdverse="noir";
+		else if(couleur.equals("noir")) couleurAdverse="blanc";
+			
+		if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse)|| contenuPlateau.get(ligne-1).get(colonne).contenu.equals("bord") && contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse)
+			|| contenuPlateau.get(ligne).get(colonne-1).contenu.equals("bord") && contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne+1).contenu.equals("bord")
+			&& contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne+1).get(colonne).contenu.equals("bord")) {
+				return false;
+		}//on verifie que le pion que l'on veut jouer n'est pas entoure par 4 pions adverses ou de 3 si bord
+		  
+		  
 		if(contenuPlateau.get(ligne).get(colonne).contenu.equals("vide")) {
 			return true;
 		}
 		else {
-			System.out.println("il y a déja une pierre ici");
-			p.JouerTour();
 			return false;
 		}
+		
+	
+		
+		  
+		
+		
+		
+		
 		
 	}
 	
@@ -66,7 +83,7 @@ public class Plateau {
 	
 	
 	public void VerifIlSePasseQqChose(Joueur j, int ligne, int colonne) { //dans cette methode on verifie s'il se passe qq chose. Si oui, on effectue les changement sur le plateau
-		  String couleur= j.couleur;
+		  String couleur= j.getCouleur();
 		  String couleurAdverse=null;
 		  
 		  if(couleur.equals("blanc")) couleurAdverse="noir";
@@ -86,13 +103,14 @@ public class Plateau {
 				 listeChaines.add(c);
 				 c.chaine.add(contenuPlateau.get(ligne).get(colonne));//on ajoute le pion a sa propre chaine
 				 
-				  if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse) && contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse) 
-					&& contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) && contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse)) {
-					  //on verifie que le pion que l'on a pose n'est pas entre 4 noirs, si cest le cas, sa chaine n'est pas libre
-					  c.libre=false;
-				  } 
 			  }
 			  
+			  
+			  if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse) && contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse) 
+				&& contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) && contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse)) {
+				  ////////////on verifie que le pion que l'on a pose n'est pas entre 4 noirs, si cest le cas, sa chaine n'est pas libre
+					  c.libre=false;
+			  } 
 			  
 			  //ajout a une chaine deja existante si on trouve un voisin de la meme couleur
 			  
@@ -140,10 +158,15 @@ public class Plateau {
 				  }
 				  if(verif.equals(false)) {
 					  System.out.println("je suis la");
-					  contenuPlateau.get(ligne-1).get(colonne).chaine.libre=false;
-					  for(Intersection inter1: contenuPlateau.get(ligne-1).get(colonne).chaine.chaine) {
-						  inter1.contenu="vide";
+					  
+					  for(Intersection inter: contenuPlateau.get(ligne-1).get(colonne).chaine.chaine) {
+						  inter.contenu="vide";
+						  inter.libre=true;
 					  }
+					
+					 contenuPlateau.get(ligne-1).get(colonne).chaine.chaine.remove(contenuPlateau.get(ligne-1).get(colonne).chaine.chaine);
+					 
+					
 				  }
 				  
 			  }
@@ -159,7 +182,10 @@ public class Plateau {
 					  contenuPlateau.get(ligne).get(colonne-1).chaine.libre=false;
 					  for(Intersection inter: c) {
 						  inter.contenu="vide";
+						  inter.libre=true;
 					  }
+					
+					 contenuPlateau.get(ligne).get(colonne-1).chaine.chaine.remove(contenuPlateau.get(ligne).get(colonne-1).chaine.chaine);
 				  }
 			  }
 						
@@ -173,7 +199,10 @@ public class Plateau {
 					  contenuPlateau.get(ligne).get(colonne+1).chaine.libre=false;
 					  for(Intersection inter: c) {
 						  inter.contenu="vide";
+						  inter.libre=true;
 					  }
+					
+					 contenuPlateau.get(ligne).get(colonne+1).chaine.chaine.remove(contenuPlateau.get(ligne).get(colonne+1).chaine.chaine);
 				  }
 				  
 			  }
@@ -188,7 +217,10 @@ public class Plateau {
 					  contenuPlateau.get(ligne+1).get(colonne).chaine.libre=false;
 					  for(Intersection inter: c) {
 						  inter.contenu="vide";
+						  inter.libre=true;
 					  }
+					
+					 contenuPlateau.get(ligne).get(colonne+1).chaine.chaine.remove(contenuPlateau.get(ligne).get(colonne).chaine.chaine);
 				  }
 			  }
 			  
