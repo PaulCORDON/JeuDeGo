@@ -53,33 +53,7 @@ public class Partie {
 	
 	
 	public void JouerPartie() {
-		while(!isFinish) {	
 			
-			JouerTour();
-			System.out.println(plateau.toString());
-			tour++;
-			
-			if(tour%2==0) {
-				jAttendant=jCourant;
-				jCourant=j2;
-			}
-			else {
-				jAttendant=jCourant;
-				jCourant=j1;
-			}
-		}
-		logger.info ("La Partie est terminée");
-		
-		System.out.println("Partie terminée.");
-		/*j1.score=CompterPoint(j1);
-		j2.score=CompterPoint(j2);*/
-		ArrayList<Joueur> joueur = new ArrayList<Joueur>();
-		j1.setScore(12);
-		j2.setScore(3);
-		joueur.add(j1);
-		joueur.add(j2);
-		Collections.sort(joueur, new ComparatorJoueur());
-		System.out.println("le gagnant est "+ joueur.get(0).getCouleur());		
 	}
 	
 	public void changerJoueur() {
