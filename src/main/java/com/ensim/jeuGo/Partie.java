@@ -14,6 +14,9 @@ import java.util.Scanner;
 import org.apache.log4j.Logger;
 import org.apache.log4j.chainsaw.Main;
 
+import application.Goban;
+import javafx.scene.control.Label;
+
 
 
 public class Partie {
@@ -24,12 +27,19 @@ public class Partie {
 	Joueur j1;
 	Joueur j2;
 	private Joueur jCourant;
-	
-	Joueur jAttendant;
+	Label info;
+	private Joueur jAttendant;	
 	Plateau plateau;
 	Boolean isFinish;
 	int tour;
-	
+	public Joueur getjAttendant() {
+		return jAttendant;
+	}
+
+
+	public void setjAttendant(Joueur jAttendant) {
+		this.jAttendant = jAttendant;
+	}
 	public Joueur getjCourant() {
 		return jCourant;
 	}
@@ -48,7 +58,7 @@ public class Partie {
 		plateau = new Plateau(this);
 		isFinish=false;
 		tour=0;
-		System.out.println(plateau.toString());
+		info=Goban.Info;
 	}
 	
 	
@@ -57,6 +67,7 @@ public class Partie {
 	}
 	
 	public void changerJoueur() {
+		logger.info("Le joueur courant change");
 		if(jCourant==j1) {
 			jCourant=j2;
 			jAttendant=j1;
@@ -79,19 +90,24 @@ public class Partie {
 	}
 	
 	public void JouerTour(String abs,String ord){
+			logger.info("coucou");
 			Integer ligne=new Integer(ord);
 			Integer colonne=new Integer(abs);		
 			jCourant.setaPasse(false);				
 			if(ligne<1||ligne>19||colonne<1||colonne>19) {
+				info.setText("Les valeurs saisient ne sont pas valide.");
+				logger.info("les coordonnees ne sont pas valides");
 				
 			}
 			else if(plateau.VerifCoupValide(ligne, colonne)) {
-				
+				logger.info("on verifie si le coup est valide");
 				plateau.contenuPlateau.get(ligne).get(colonne).contenu=jCourant.getCouleur();
 				plateau.VerifIlSePasseQqChose(jCourant, ligne, colonne);
+				changerJoueur();
 			}
-			else{
-				
+			else {
+				info.setText("Le coup n'est pas valide.");
+				logger.info("Le coup n'est pas valide.");
 			}
 	}
 	

@@ -1,5 +1,6 @@
 package application;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -9,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +21,10 @@ import javafx.scene.shape.Circle;
 public class Goban implements Initializable{
 
 	Partie p=new Partie();
+	
+	@FXML
+	public static  Label Info;
+	
 	@FXML
 	private Button BtnPasser;
 	
@@ -53,6 +59,9 @@ public class Goban implements Initializable{
 		}
 		else {
 			CercleJoueur.setFill(Color.BLACK);
+		}
+		if(p.getjCourant().isaPasse()&&p.getjAttendant().isaPasse()) {
+			BtnPasser.setDisable(true);
 		}
 		
 	}

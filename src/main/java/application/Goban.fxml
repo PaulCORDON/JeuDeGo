@@ -67,15 +67,15 @@
                               <Image url="@Goban.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="BtnPasser" layoutX="504.0" layoutY="167.0" mnemonicParsing="false" onAction="#passerTour" text="Passer" />
-                        <Text layoutX="522.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou" />
-                        <TextField fx:id="TxtAbs" layoutX="442.0" layoutY="49.0" prefHeight="25.0" prefWidth="120.0" />
-                        <Text layoutX="420.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="abs" />
-                        <Text layoutX="421.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ord" />
-                        <Button fx:id="BtnJouer" layoutX="584.0" layoutY="65.0" mnemonicParsing="false" onAction="#JouerTour" text="Jouer" />
-                        <TextField fx:id="TxtOrd" layoutX="442.0" layoutY="77.0" prefHeight="25.0" prefWidth="120.0" />
-                        <Text layoutX="446.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C'est au tour de :" />
-                        <Circle fx:id="CercleJoueur" layoutX="576.0" layoutY="281.0" radius="22.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Button fx:id="BtnPasser" layoutX="504.0" layoutY="240.0" mnemonicParsing="false" onAction="#passerTour" text="Passer" />
+                        <Text layoutX="522.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou" />
+                        <TextField fx:id="TxtAbs" layoutX="442.0" layoutY="122.0" prefHeight="25.0" prefWidth="120.0" />
+                        <Text layoutX="420.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="abs" />
+                        <Text layoutX="421.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ord" />
+                        <Button fx:id="BtnJouer" layoutX="584.0" layoutY="138.0" mnemonicParsing="false" onAction="#JouerTour" text="Jouer" />
+                        <TextField fx:id="TxtOrd" layoutX="442.0" layoutY="150.0" prefHeight="25.0" prefWidth="120.0" />
+                        <Text layoutX="457.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C'est au tour de :" />
+                        <Circle fx:id="CercleJoueur" layoutX="587.0" layoutY="46.0" radius="22.0" stroke="BLACK" strokeType="INSIDE" />
                         <Text layoutX="400.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
                         <Text layoutX="400.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
                         <Text layoutX="400.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
@@ -114,12 +114,12 @@
                         <Text layoutX="340.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="17" />
                         <Text layoutX="361.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
                         <Text layoutX="381.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19" />
+                        <Label fx:id="Info" alignment="TOP_LEFT" layoutX="428.0" layoutY="329.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="232.0" text="INFO BOX:" />
                      </children>
                   </AnchorPane>
                </children>
             </StackPane>
          </children>
     </AnchorPane>
-      <Label fx:id="Info" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" />
   </children>
 </VBox>
