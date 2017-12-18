@@ -285,7 +285,7 @@ public class Plateau {
 	
 	
 	
-	public Boolean CalculLiberteChaine(int ligne, int colonne, String couleur) {
+	public Boolean CalculLiberteChaine(int ligne, int colonne, String couleur) { 
 		Boolean renvoi=false;
 		
 		//!!!!!!!!!!!!reste a verifier lorsque une chaine est composee d'un seul pion
@@ -294,6 +294,8 @@ public class Plateau {
 		//si cest le cas on regarde si la chaine a une autre liberte que l'intersection sur laquelle on veut jouer
 		
 		 if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleur)) {
+			 //cette methode sera appelee dans verifcoupvalide pour savoir si lorsqu'on ajoute un pion a une chaine on ne rend pas la chaine capturee
+			 //si a cause de l'ajout du pion la chaine n'est plus libre, le coup est suicidaire donc on l'interdit
 			  
 			  ArrayList<Intersection> c=contenuPlateau.get(ligne-1).get(colonne).chaine.chaine;
 			  Boolean b=false;
