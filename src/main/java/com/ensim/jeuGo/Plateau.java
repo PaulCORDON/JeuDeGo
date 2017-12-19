@@ -36,16 +36,23 @@ public class Plateau {
 		String couleurAdverse=null;  
 		if(couleur.equals("blanc")) couleurAdverse="noir";
 		else if(couleur.equals("noir")) couleurAdverse="blanc";
-		Boolean renvoi=true;
+		Boolean renvoi=false;
 			
 				  
 		
 		if(contenuPlateau.get(ligne).get(colonne).contenu.equals("vide")) {
 			
-			if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse)&& contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse)&& 
-				contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) &&  contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse)) {
+			renvoi=true;
+			
+			if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne-1).get(colonne).contenu.equals("bord")
+				&& contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne-1).contenu.equals("bord")
+				&& contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne+1).contenu.equals("bord") 
+				&&  contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne+1).get(colonne).contenu.equals("bord")) {
 						renvoi=false;
+						System.out.println("coup suicidaire pion entouré");
 				}//on verifie que le pion que l'on veut jouer n'est pas entoure par 4 pions adverses
+		
+			else if(CalculLiberteChaine(ligne, colonne, couleur)) renvoi=true;
 			
 		
 		}
@@ -54,7 +61,7 @@ public class Plateau {
 		}
 			
 		
-		renvoi=CalculLiberteChaine(ligne, colonne, couleur);
+		
 		
 		return renvoi;	
 	}
@@ -293,22 +300,28 @@ public class Plateau {
 		
 		Boolean renvoi=false;
 		
-		//!!!!!!!!!!!!reste a verifier lorsque une chaine est composee d'un seul pion
-		
 		
 		//on verifie si le pion va s'ajouter a une chaine de sa couleur
 		//si cest le cas on regarde si la chaine a une autre liberte que l'intersection sur laquelle on veut jouer
 		
 		 if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleur)) {
 			
-			  
 			  ArrayList<Intersection> c=contenuPlateau.get(ligne-1).get(colonne).chaine.chaine;
 			  Boolean b=false;
 			  for(Intersection inter: c) {
-				  if(inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
+				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter!=contenuPlateau.get(ligne).get(colonne-1) && inter!=contenuPlateau.get(ligne+1).get(colonne) && inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
 				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
 				  if(c.size()==1) {
-					  b=true;
+					  if(contenuPlateau.get(ligne-2).get(colonne).contenu=="vide" || contenuPlateau.get(ligne-1).get(colonne-1).contenu=="vide"
+						|| contenuPlateau.get(ligne-1).get(colonne+1).contenu =="vide" && ligne!=1) {
+						  b=true;
+						  renvoi=true;
+					  }
+					  if(ligne-1==1 && contenuPlateau.get(ligne).get(colonne).libre) {
+						  b=true;
+						  renvoi=true;
+					  }
+					  
 				  }
 			  }
 			  if(b.equals(false)) {
@@ -321,8 +334,19 @@ public class Plateau {
 			  ArrayList<Intersection> c=contenuPlateau.get(ligne+1).get(colonne).chaine.chaine;
 			  Boolean b=false;
 			  for(Intersection inter: c) {
-				  if(inter!=contenuPlateau.get(ligne+1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
+				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter!=contenuPlateau.get(ligne).get(colonne-1) && inter!=contenuPlateau.get(ligne+1).get(colonne) && inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
 				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
+				  if(c.size()==1) {
+					  if(contenuPlateau.get(ligne+1).get(colonne-1).contenu=="vide" || contenuPlateau.get(ligne+2).get(colonne).contenu=="vide"
+						|| contenuPlateau.get(ligne+1).get(colonne+1).contenu=="vide" && ligne!= tailleGrille-2) {
+					  b=true;
+					  renvoi=true;
+					  }
+					  if(ligne+1==tailleGrille-2 && contenuPlateau.get(ligne).get(colonne).libre) {
+						  b=true;
+						  renvoi=true;
+					  }
+				  }
 			  }
 			  if(b.equals(false)) {
 				  					  
@@ -334,8 +358,20 @@ public class Plateau {
 			  ArrayList<Intersection> c=contenuPlateau.get(ligne).get(colonne-1).chaine.chaine;
 			  Boolean b=false;
 			  for(Intersection inter: c) {
-				  if(inter!=contenuPlateau.get(ligne).get(colonne-1) && inter.libre && c.size()>1) b=true; renvoi=true;
+				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter!=contenuPlateau.get(ligne).get(colonne-1) && inter!=contenuPlateau.get(ligne+1).get(colonne) && inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
 				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
+				  if(c.size()==1) {
+					  if(contenuPlateau.get(ligne-1).get(colonne-1).contenu=="vide" || contenuPlateau.get(ligne).get(colonne-2).contenu=="vide"
+						|| contenuPlateau.get(ligne+1).get(colonne-1).contenu=="vide" && colonne!=1) {
+						  b=true;
+						  renvoi=true;
+					  }
+					  if(colonne-1==1 && contenuPlateau.get(ligne).get(colonne).libre) {
+						  b=true;
+						  renvoi=true;
+					  }
+					  
+				  }
 			  }
 			  if(b.equals(false)) {
 				  					  
@@ -347,16 +383,30 @@ public class Plateau {
 			  ArrayList<Intersection> c=contenuPlateau.get(ligne).get(colonne+1).chaine.chaine;
 			  Boolean b=false;
 			  for(Intersection inter: c) {
-				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter.libre && c.size()>1) b=true; renvoi=true;
+				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter!=contenuPlateau.get(ligne).get(colonne-1) && inter!=contenuPlateau.get(ligne+1).get(colonne) && inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
 				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
+				  if(c.size()==1) {
+					  if(contenuPlateau.get(ligne-1).get(colonne+1).contenu=="vide" || contenuPlateau.get(ligne).get(colonne+2).contenu=="vide"
+						|| contenuPlateau.get(ligne+1).get(colonne+1).contenu=="vide" && colonne!=tailleGrille-2) {
+					  b=true;
+					  renvoi=true;
+					  }
+					  
+					  if(colonne+1==tailleGrille-2 && contenuPlateau.get(ligne).get(colonne).libre) {
+						  b=true;
+						  renvoi=true;
+					  }
+				  }
 			  }
 			  if(b.equals(false)) {
 				  					  
 				  renvoi=false;	//si il n'y a pas d'autre liberte on ne peux pas jouer donc on retourne false
 			  }
 		}
+		 
 		else renvoi=true;
-		
+		if(!renvoi) System.out.println("tu peux pas jouer la car coup suicidaire");
+		System.out.println("liberte ligne colonne:" +contenuPlateau.get(ligne).get(colonne).libre);
 		return renvoi;
 		
 	}

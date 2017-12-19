@@ -1,7 +1,5 @@
 package com.ensim.jeuGo;
 
-import java.util.ArrayList;
-
 public class Intersection {
 	String contenu;
 	public String getContenu() {
