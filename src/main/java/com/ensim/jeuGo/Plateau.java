@@ -28,28 +28,39 @@ public class Plateau {
 		p=pa;
 	}
 	
+	
+	
 	public Boolean VerifCoupValide(Joueur j, int ligne,int colonne) {
-		boolean isValide=false;
+		
 		String couleur= j.getCouleur();
-		String couleurAdverse=null;  if(couleur.equals("blanc")) couleurAdverse="noir";
+		String couleurAdverse=null;  
+		if(couleur.equals("blanc")) couleurAdverse="noir";
 		else if(couleur.equals("noir")) couleurAdverse="blanc";
+		Boolean renvoi=true;
 			
-		if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse)|| contenuPlateau.get(ligne-1).get(colonne).contenu.equals("bord") && contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse)
-			|| contenuPlateau.get(ligne).get(colonne-1).contenu.equals("bord") && contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne+1).contenu.equals("bord")
-			&& contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne+1).get(colonne).contenu.equals("bord")) {
-			isValide=false;	
-		}//on verifie que le pion que l'on veut jouer n'est pas entoure par 4 pions adverses ou de 3 si bord
-		  
-		  
+				  
+		
 		if(contenuPlateau.get(ligne).get(colonne).contenu.equals("vide")) {
-			isValide= true;
+			
+			if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse)&& contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse)&& 
+				contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) &&  contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse)) {
+						renvoi=false;
+				}//on verifie que le pion que l'on veut jouer n'est pas entoure par 4 pions adverses
+			
+		
 		}
 		else {
-			isValide= false;
+			renvoi=false;
 		}
-		return isValide;	
+			
 		
+		renvoi=CalculLiberteChaine(ligne, colonne, couleur);
+		
+		return renvoi;	
 	}
+	
+	
+	
 	
 	public String toString() {
 		String goban="";
@@ -93,19 +104,13 @@ public class Plateau {
 				&& contenuPlateau.get(ligne).get(colonne+1).contenu != couleur && contenuPlateau.get(ligne+1).get(colonne).contenu != couleur) {
 				  //si le pion que l'on pose ne peut se rattacher a aucune chaine existante on en cree une nouvelle
 				 Chaine c= new Chaine(couleur);
-				 contenuPlateau.get(ligne).get(colonne).chaine=c;//la chaine du pion joué est donc la chaine c
+				 contenuPlateau.get(ligne).get(colonne).chaine=c;//la chaine du pion jouï¿½ est donc la chaine c
 				 listeChaines.add(c);
 				 c.chaine.add(contenuPlateau.get(ligne).get(colonne));//on ajoute le pion a sa propre chaine
 				 
 			  }
 			  
-			  
-			  if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse) && contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse) 
-				&& contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) && contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse)) {
-				  ////////////on verifie que le pion que l'on a pose n'est pas entre 4 noirs, si cest le cas, sa chaine n'est pas libre
-					  /*c.libre=false;*/
-			  } 
-			  
+			 
 			  //ajout a une chaine deja existante si on trouve un voisin de la meme couleur
 			  
 			  if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleur)) {
@@ -134,31 +139,28 @@ public class Plateau {
 				  contenuPlateau.get(ligne+1).get(colonne).chaine.chaine.add(contenuPlateau.get(ligne).get(colonne));
 			  }
 			  
-			  
+			 			  
 			  
 			  //cas ou l'on trouve un voisin de la couleur adverse
 			  //on verifie dans la chaine de celui-ci la liberte de chaque pion
 			  //si aucun pion de la chaine n'est libre la chaine n'est plus libre
 			  
 			  if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse)) {
-				  System.out.println("le pion du dessus est adverse");
 				  
 				  ArrayList<Intersection> c=contenuPlateau.get(ligne-1).get(colonne).chaine.chaine;
-				  System.out.println("la chaine du pion du dessus est: "+c);
 				  Boolean verif=false;
-				  for(Intersection inter: contenuPlateau.get(ligne-1).get(colonne).chaine.chaine) {
-					  System.out.println("je verifie la liberte de chaque pion de la chaine du pion adverse");
+				  for(Intersection inter: c) {
 					  if(inter.libre) verif=true;
 				  }
 				  if(verif.equals(false)) {
-					  System.out.println("je suis la");
-					  
-					  for(Intersection inter: contenuPlateau.get(ligne-1).get(colonne).chaine.chaine) {
+					  					  
+					  for(Intersection inter: c) {
 						  inter.contenu="vide";
 						  inter.libre=true;
 					  }
 					
-					 contenuPlateau.get(ligne-1).get(colonne).chaine.chaine.remove(contenuPlateau.get(ligne-1).get(colonne).chaine.chaine);
+					 contenuPlateau.get(ligne-1).get(colonne).chaine=null;
+					 listeChaines.remove(contenuPlateau.get(ligne-1).get(colonne).chaine);
 					 
 					
 				  }
@@ -179,7 +181,8 @@ public class Plateau {
 						  inter.libre=true;
 					  }
 					
-					 contenuPlateau.get(ligne).get(colonne-1).chaine.chaine.remove(contenuPlateau.get(ligne).get(colonne-1).chaine.chaine);
+					 contenuPlateau.get(ligne).get(colonne-1).chaine=null;
+					 listeChaines.remove(contenuPlateau.get(ligne-1).get(colonne).chaine);
 				  }
 			  }
 						
@@ -196,7 +199,8 @@ public class Plateau {
 						  inter.libre=true;
 					  }
 					
-					 contenuPlateau.get(ligne).get(colonne+1).chaine.chaine.remove(contenuPlateau.get(ligne).get(colonne+1).chaine.chaine);
+					 contenuPlateau.get(ligne).get(colonne+1).chaine=null;
+					 listeChaines.remove(contenuPlateau.get(ligne-1).get(colonne).chaine);
 				  }
 				  
 			  }
@@ -214,12 +218,12 @@ public class Plateau {
 						  inter.libre=true;
 					  }
 					
-					 contenuPlateau.get(ligne).get(colonne+1).chaine.chaine.remove(contenuPlateau.get(ligne).get(colonne).chaine.chaine);
+					 contenuPlateau.get(ligne).get(colonne+1).chaine=null;
+					 listeChaines.remove(contenuPlateau.get(ligne-1).get(colonne).chaine);
 				  }
 			  }
-			  
-	
-		
+			 
+			 
 	}
 	
 	
@@ -227,41 +231,42 @@ public class Plateau {
 	
 	
 	public void calculLibertePion(int ligne, int colonne) {	
-		//cette methode sera appelee dans verifIlSePasseQqchose pour dire si le pion posé et ses 4 voisins sont toujours libres suite au coup joué
+		//cette methode sera appelee dans verifIlSePasseQqchose pour dire si le pion posï¿½ et ses 4 voisins sont toujours libres suite au coup jouï¿½
 		
 		 if(contenuPlateau.get(ligne-1).get(colonne).contenu!="vide" && contenuPlateau.get(ligne).get(colonne-1).contenu!="vide"
 			&& contenuPlateau.get(ligne).get(colonne+1).contenu!="vide" && contenuPlateau.get(ligne+1).get(colonne).contenu!="vide") {
-			 //on verifie la liberté du pion posé
+			 //on verifie la libertï¿½ du pion posï¿½
 			 
 			 contenuPlateau.get(ligne).get(colonne).libre=false;
 			 System.out.println("liberte pion pose:"+contenuPlateau.get(ligne).get(colonne).libre);
 		 }
 		 	
+		
 	
-		 if(contenuPlateau.get(ligne-1).get(colonne).contenu!="vide") {
+		 if(contenuPlateau.get(ligne-1).get(colonne).contenu!="vide" && ligne!=1) {
 			 if(contenuPlateau.get(ligne-2).get(colonne).contenu!="vide" && contenuPlateau.get(ligne-1).get(colonne-1).contenu!="vide"
 				&& contenuPlateau.get(ligne-1).get(colonne+1).contenu!="vide") {
-				 //on verifie la liberté du pion au dessus du pion posé
+				 //on verifie la libertï¿½ du pion au dessus du pion posï¿½
 				 
 				 contenuPlateau.get(ligne-1).get(colonne).libre=false;
 				 System.out.println("liberte pion au dessus:"+contenuPlateau.get(ligne-1).get(colonne).libre);
 			 }
 		 }
 		 
-		 if(contenuPlateau.get(ligne).get(colonne-1).contenu!="vide") {
+		 if(contenuPlateau.get(ligne).get(colonne-1).contenu!="vide" && colonne!=1) {
 			 if(contenuPlateau.get(ligne-1).get(colonne-1).contenu!="vide" && contenuPlateau.get(ligne).get(colonne-2).contenu!="vide"
 				&& contenuPlateau.get(ligne+1).get(colonne-1).contenu!="vide") {
-				//on verifie la liberté du pion a gauche du pion posé
+				//on verifie la libertï¿½ du pion a gauche du pion posï¿½
 						 
 				contenuPlateau.get(ligne).get(colonne-1).libre=false;
 				System.out.println("liberte pion gauche:"+contenuPlateau.get(ligne).get(colonne-1).libre);
 			 }
 		 }
 		 
-		 if(contenuPlateau.get(ligne+1).get(colonne).contenu!="vide") {
+		 if(contenuPlateau.get(ligne+1).get(colonne).contenu!="vide" && ligne!=tailleGrille-2) {
 			 if(contenuPlateau.get(ligne+1).get(colonne-1).contenu!="vide" && contenuPlateau.get(ligne+2).get(colonne).contenu!="vide"
 				&& contenuPlateau.get(ligne+1).get(colonne+1).contenu!="vide") {
-				//on verifie la liberté du pion en dessous du pion posé
+				//on verifie la libertï¿½ du pion en dessous du pion posï¿½
 								 
 					 contenuPlateau.get(ligne+1).get(colonne).libre=false;
 					 System.out.println("liberte pion dessous:"+contenuPlateau.get(ligne+1).get(colonne).libre);
@@ -269,15 +274,91 @@ public class Plateau {
 		 }
 	
 		 
-		 if(contenuPlateau.get(ligne).get(colonne+1).contenu!="vide") {
+		 if(contenuPlateau.get(ligne).get(colonne+1).contenu!="vide" && colonne!=tailleGrille-2) {
 			 if(contenuPlateau.get(ligne-1).get(colonne+1).contenu!="vide" && contenuPlateau.get(ligne).get(colonne+2).contenu!="vide"
 				&& contenuPlateau.get(ligne+1).get(colonne+1).contenu!="vide") {
-				//on verifie la liberté du pion a droite du pion posé
+				//on verifie la libertï¿½ du pion a droite du pion posï¿½
 										 
 					 contenuPlateau.get(ligne).get(colonne+1).libre=false;
 					 System.out.println("liberte pion droit:"+contenuPlateau.get(ligne).get(colonne+1).libre);
 			 }
 		 }
+	}
+	
+	
+	
+	public Boolean CalculLiberteChaine(int ligne, int colonne, String couleur) { 
+		 //cette methode sera appelee dans verifcoupvalide pour savoir si lorsqu'on ajoute un pion a une chaine on ne rend pas la chaine capturee
+		 //si a cause de l'ajout du pion la chaine n'est plus libre, le coup est suicidaire donc on l'interdit
+		
+		Boolean renvoi=false;
+		
+		//!!!!!!!!!!!!reste a verifier lorsque une chaine est composee d'un seul pion
+		
+		
+		//on verifie si le pion va s'ajouter a une chaine de sa couleur
+		//si cest le cas on regarde si la chaine a une autre liberte que l'intersection sur laquelle on veut jouer
+		
+		 if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleur)) {
+			
+			  
+			  ArrayList<Intersection> c=contenuPlateau.get(ligne-1).get(colonne).chaine.chaine;
+			  Boolean b=false;
+			  for(Intersection inter: c) {
+				  if(inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
+				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
+				  if(c.size()==1) {
+					  b=true;
+				  }
+			  }
+			  if(b.equals(false)) {
+				  					  
+				  renvoi=false;	//si il n'y a pas d'autre liberte on ne peux pas jouer donc on retourne false
+			  }
+		}
+		else if(contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleur)) {
+			  
+			  ArrayList<Intersection> c=contenuPlateau.get(ligne+1).get(colonne).chaine.chaine;
+			  Boolean b=false;
+			  for(Intersection inter: c) {
+				  if(inter!=contenuPlateau.get(ligne+1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
+				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
+			  }
+			  if(b.equals(false)) {
+				  					  
+				  renvoi=false;	//si il n'y a pas d'autre liberte on ne peux pas jouer donc on retourne false
+			  }
+		}
+		else if(contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleur)) {
+			  
+			  ArrayList<Intersection> c=contenuPlateau.get(ligne).get(colonne-1).chaine.chaine;
+			  Boolean b=false;
+			  for(Intersection inter: c) {
+				  if(inter!=contenuPlateau.get(ligne).get(colonne-1) && inter.libre && c.size()>1) b=true; renvoi=true;
+				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
+			  }
+			  if(b.equals(false)) {
+				  					  
+				  renvoi=false;	//si il n'y a pas d'autre liberte on ne peux pas jouer donc on retourne false
+			  }
+		}
+		else if(contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleur)) {
+			  
+			  ArrayList<Intersection> c=contenuPlateau.get(ligne).get(colonne+1).chaine.chaine;
+			  Boolean b=false;
+			  for(Intersection inter: c) {
+				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter.libre && c.size()>1) b=true; renvoi=true;
+				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
+			  }
+			  if(b.equals(false)) {
+				  					  
+				  renvoi=false;	//si il n'y a pas d'autre liberte on ne peux pas jouer donc on retourne false
+			  }
+		}
+		else renvoi=true;
+		
+		return renvoi;
+		
 	}
 }
 	
