@@ -9,7 +9,7 @@ public class Plateau {
 	public ArrayList<ArrayList<Intersection>> contenuPlateau= new ArrayList<ArrayList<Intersection>>();
 	public ArrayList<Chaine> listeChaines= new ArrayList<Chaine>();
 	Partie p;
-	int tailleGrille=12;
+	int tailleGrille=21;
 	
 	public Plateau(Partie pa){	
 		for(int i=0;i<tailleGrille;i++) {			
@@ -20,6 +20,7 @@ public class Plateau {
 				}
 				else {
 					contenuPlateau.get(i).add(new Intersection("vide"));
+					
 				}
 				
 			}
@@ -28,7 +29,7 @@ public class Plateau {
 	}
 	
 	public Boolean VerifCoupValide(Joueur j, int ligne,int colonne) {
-
+		boolean isValide=false;
 		String couleur= j.getCouleur();
 		String couleurAdverse=null;  if(couleur.equals("blanc")) couleurAdverse="noir";
 		else if(couleur.equals("noir")) couleurAdverse="blanc";
@@ -36,24 +37,17 @@ public class Plateau {
 		if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse)|| contenuPlateau.get(ligne-1).get(colonne).contenu.equals("bord") && contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse)
 			|| contenuPlateau.get(ligne).get(colonne-1).contenu.equals("bord") && contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne+1).contenu.equals("bord")
 			&& contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne+1).get(colonne).contenu.equals("bord")) {
-				return false;
+			isValide=false;	
 		}//on verifie que le pion que l'on veut jouer n'est pas entoure par 4 pions adverses ou de 3 si bord
 		  
 		  
 		if(contenuPlateau.get(ligne).get(colonne).contenu.equals("vide")) {
-			return true;
+			isValide= true;
 		}
 		else {
-			return false;
+			isValide= false;
 		}
-		
-	
-		
-		  
-		
-		
-		
-		
+		return isValide;	
 		
 	}
 	
@@ -109,7 +103,7 @@ public class Plateau {
 			  if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse) && contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse) 
 				&& contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) && contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse)) {
 				  ////////////on verifie que le pion que l'on a pose n'est pas entre 4 noirs, si cest le cas, sa chaine n'est pas libre
-					  c.libre=false;
+					  /*c.libre=false;*/
 			  } 
 			  
 			  //ajout a une chaine deja existante si on trouve un voisin de la meme couleur

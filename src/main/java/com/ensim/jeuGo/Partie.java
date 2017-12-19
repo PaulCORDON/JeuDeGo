@@ -29,7 +29,7 @@ public class Partie {
 	private Joueur jCourant;
 	Label info;
 	private Joueur jAttendant;	
-	Plateau plateau;
+	public Plateau plateau;
 	Boolean isFinish;
 	int tour;
 	public Joueur getjAttendant() {
@@ -90,24 +90,28 @@ public class Partie {
 	}
 	
 	public void JouerTour(String abs,String ord){
-			logger.info("coucou");
+			System.out.println("coucou");
+			
 			Integer ligne=new Integer(ord);
 			Integer colonne=new Integer(abs);		
-			jCourant.setaPasse(false);				
+			jCourant.setaPasse(false);		
+			
 			if(ligne<1||ligne>19||colonne<1||colonne>19) {
 				info.setText("Les valeurs saisient ne sont pas valide.");
 				logger.info("les coordonnees ne sont pas valides");
-				
+				System.out.println("coucou1 "+ligne+" "+colonne);
 			}
-			else if(plateau.VerifCoupValide(ligne, colonne)) {
+			else if(plateau.VerifCoupValide(jCourant, ligne, colonne)) {
 				logger.info("on verifie si le coup est valide");
 				plateau.contenuPlateau.get(ligne).get(colonne).contenu=jCourant.getCouleur();
 				plateau.VerifIlSePasseQqChose(jCourant, ligne, colonne);
 				changerJoueur();
+				System.out.println("coucou2 "+ligne+" "+colonne);
 			}
 			else {
 				info.setText("Le coup n'est pas valide.");
 				logger.info("Le coup n'est pas valide.");
+				System.out.println("coucou3"+ligne+" "+colonne);
 			}
 	}
 	
