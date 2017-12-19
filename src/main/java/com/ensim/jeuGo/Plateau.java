@@ -42,12 +42,12 @@ public class Plateau {
 		
 		if(contenuPlateau.get(ligne).get(colonne).contenu.equals("vide")) {
 			
-			renvoi=true;
 			
-			if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne-1).get(colonne).contenu.equals("bord")
-				&& contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne-1).contenu.equals("bord")
-				&& contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne+1).contenu.equals("bord") 
-				&&  contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne+1).get(colonne).contenu.equals("bord")) {
+			
+			if((contenuPlateau.get(ligne-1).get(colonne).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne-1).get(colonne).contenu.equals("bord"))
+				&& (contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne-1).contenu.equals("bord"))
+				&& (contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne+1).contenu.equals("bord")) 
+				&&  (contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne+1).get(colonne).contenu.equals("bord"))) {
 						renvoi=false;
 						System.out.println("coup suicidaire pion entouré");
 				}//on verifie que le pion que l'on veut jouer n'est pas entoure par 4 pions adverses
@@ -61,7 +61,7 @@ public class Plateau {
 		}
 			
 		
-		
+		System.out.println("renvoi: "+renvoi);
 		
 		return renvoi;	
 	}
@@ -405,8 +405,8 @@ public class Plateau {
 		}
 		 
 		else renvoi=true;
+		 
 		if(!renvoi) System.out.println("tu peux pas jouer la car coup suicidaire");
-		System.out.println("liberte ligne colonne:" +contenuPlateau.get(ligne).get(colonne).libre);
 		return renvoi;
 		
 	}
