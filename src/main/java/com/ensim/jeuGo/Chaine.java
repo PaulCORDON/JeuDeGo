@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Chaine {
 
-	public ArrayList<Intersection> chaine= new ArrayList<Intersection>();
+	public ArrayList<Intersection> intersectionsContenuesDsLaChaine= new ArrayList<Intersection>();
 	Boolean libre= true;
 	String couleur;
 	
