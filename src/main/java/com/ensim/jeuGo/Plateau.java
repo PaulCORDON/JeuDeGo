@@ -179,10 +179,7 @@ public class Plateau {
 				  }
 			  }
 			  
-			  System.out.println("liste chaines: "+listeChaines);
-			  System.out.println("liste pion: "+contenuPlateau.get(ligne).get(colonne).chaine.intersectionsContenuesDsLaChaine);
-			 			  
-			  
+			 
 			  //cas ou l'on trouve un voisin de la couleur adverse
 			  //on verifie dans la chaine de celui-ci la liberte de chaque pion
 			  //si aucun pion de la chaine n'est libre la chaine n'est plus libre
@@ -339,6 +336,9 @@ public class Plateau {
 			
 			  ArrayList<Intersection> c=contenuPlateau.get(ligne-1).get(colonne).chaine.intersectionsContenuesDsLaChaine;
 			  Boolean b=false;
+			  
+			  
+			  
 			  for(Intersection inter: c) {
 				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter!=contenuPlateau.get(ligne).get(colonne-1) && inter!=contenuPlateau.get(ligne+1).get(colonne) && inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
 				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
