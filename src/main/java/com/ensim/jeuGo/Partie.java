@@ -58,7 +58,7 @@ public class Partie {
 		plateau = new Plateau(this);
 		isFinish=false;
 		tour=0;
-		info=Goban.Info;
+		
 	}
 	
 	
@@ -89,30 +89,28 @@ public class Partie {
 		
 	}
 	
-	public void JouerTour(String abs,String ord){
+	public int JouerTour(String abs,String ord){
 			System.out.println("coucou");
-			
+			int rep=4;
 			Integer ligne=new Integer(ord);
 			Integer colonne=new Integer(abs);		
 			jCourant.setaPasse(false);		
 			
-			if(ligne<1||ligne>19||colonne<1||colonne>19) {
-				info.setText("Les valeurs saisient ne sont pas valide.");
+			if(ligne<1||ligne>19||colonne<1||colonne>19) {				
 				logger.info("les coordonnees ne sont pas valides");
-				System.out.println("coucou1 "+ligne+" "+colonne);
+				rep=1;
 			}
-			else if(plateau.VerifCoupValide(jCourant, ligne, colonne)) {
+			else if(plateau.VerifCoupValide(jCourant, ligne, colonne)>=4) {
 				logger.info("on verifie si le coup est valide");
 				plateau.contenuPlateau.get(ligne).get(colonne).contenu=jCourant.getCouleur();
 				plateau.VerifIlSePasseQqChose(jCourant, ligne, colonne);
-				changerJoueur();
-				System.out.println("coucou2 "+ligne+" "+colonne);
+				changerJoueur();	
 			}
 			else {
-				info.setText("Le coup n'est pas valide.");
-				logger.info("Le coup n'est pas valide.");
-				System.out.println("coucou3"+ligne+" "+colonne);
+				rep=plateau.VerifCoupValide(jCourant, ligne, colonne);				
+				logger.info("Le coup n'est pas valide.");			
 			}
+			return rep;
 	}
 	
 	
