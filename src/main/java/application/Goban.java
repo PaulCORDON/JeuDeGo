@@ -1,7 +1,8 @@
 package application;
 
 
-import java.awt.MenuItem;
+
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -18,11 +19,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.PopupWindow.AnchorLocation;
+import javafx.scene.control.Menu;
 
 
 public class Goban implements Initializable{
@@ -30,17 +33,24 @@ public class Goban implements Initializable{
 	Partie p=new Partie();
 	
 	
-	@FXML
-	public  MenuItem MenuNew;
 	
 	@FXML
-	public  MenuItem MenuOpen;
+	public Menu MenuFile;
+	
+	@FXML
+	public MenuItem MenuNew;
+	
+	@FXML
+	public MenuItem MenuOpen;
 	
 	@FXML
 	public  MenuItem MenuSave;
 	
 	@FXML
 	public  MenuItem MenuQuit;
+	
+	@FXML
+	public Menu MenuInformation;
 	
 	@FXML
 	public  MenuItem MenuInfo;
@@ -82,7 +92,7 @@ public class Goban implements Initializable{
 	
 	
 	public void NewGame (ActionEvent event) {
-
+		Partie p=new Partie();
 	}
 	
 	public void OpenGame (ActionEvent event) {
