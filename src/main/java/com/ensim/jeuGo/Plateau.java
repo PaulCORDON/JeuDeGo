@@ -128,7 +128,8 @@ public class Plateau {
 				  
 			  }
 				  
-			  else if(contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleur)) {
+			 if(contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleur)) {
+				  System.out.println("chaine du pion joué: "+contenuPlateau.get(ligne).get(colonne).chaine);
 				  if(contenuPlateau.get(ligne).get(colonne).chaine.equals(null)) {
 					  contenuPlateau.get(ligne).get(colonne).chaine=contenuPlateau.get(ligne).get(colonne-1).chaine;
 					  contenuPlateau.get(ligne).get(colonne-1).chaine.intersectionsContenuesDsLaChaine.add(contenuPlateau.get(ligne).get(colonne));
@@ -145,13 +146,13 @@ public class Plateau {
 				  
 			  }
 						
-			  else if(contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleur)) {
+			  if(contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleur)) {
 				  
 				  contenuPlateau.get(ligne).get(colonne).chaine=contenuPlateau.get(ligne).get(colonne+1).chaine;
 				  contenuPlateau.get(ligne).get(colonne+1).chaine.intersectionsContenuesDsLaChaine.add(contenuPlateau.get(ligne).get(colonne));
 			  }
 				
-			  else if(contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleur)) {
+			  if(contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleur)) {
 				  
 				  contenuPlateau.get(ligne).get(colonne).chaine=contenuPlateau.get(ligne+1).get(colonne).chaine;
 				  contenuPlateau.get(ligne+1).get(colonne).chaine.intersectionsContenuesDsLaChaine.add(contenuPlateau.get(ligne).get(colonne));

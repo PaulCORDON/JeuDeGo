@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,17 +19,39 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu fx:id="MenuFile" mnemonicParsing="false" text="File">
+        <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem fx:id="MenuNew" mnemonicParsing="false" onAction="#NewGame" text="New" />
-            <MenuItem fx:id="MenuSave" mnemonicParsing="false" onAction="#SaveGame" text="Save" />
-            <MenuItem fx:id="MenuOpen" mnemonicParsing="false" onAction="#OpenGame" text="Open" />
-            <MenuItem fx:id="MenuQuit" mnemonicParsing="false" onAction="#QuitGame" text="Quit" />
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
-        <Menu fx:id="MenuInformation" mnemonicParsing="false" text="Informations">
+        <Menu mnemonicParsing="false" text="Edit">
           <items>
-            <MenuItem fx:id="MenuInfo" mnemonicParsing="false" onAction="#AfficheInfo" text="Apropos" />
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
           </items>
         </Menu>
       </menus>
@@ -96,7 +119,6 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="BtnSup" disable="true" layoutX="577.0" layoutY="135.0" mnemonicParsing="false" onAction="#SupprPion" text="Supprimer" visible="false" />
                      </children>
                   </AnchorPane>
                </children>
