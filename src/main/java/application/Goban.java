@@ -1,6 +1,8 @@
 package application;
 
 
+
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -17,25 +19,53 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.PopupWindow.AnchorLocation;
+import javafx.scene.control.Menu;
 
 
 public class Goban implements Initializable{
 
 	Partie p=new Partie();
 	
+	
+	
 	@FXML
-	public static  Label Info;
+	public Menu MenuFile;
+	
+	@FXML
+	public MenuItem MenuNew;
+	
+	@FXML
+	public MenuItem MenuOpen;
+	
+	@FXML
+	public  MenuItem MenuSave;
+	
+	@FXML
+	public  MenuItem MenuQuit;
+	
+	@FXML
+	public Menu MenuInformation;
+	
+	@FXML
+	public  MenuItem MenuInfo;
+	
+	@FXML
+	public  Label Info;
 	
 	@FXML
 	private Button BtnPasser;
 	
 	@FXML
 	private Button BtnJouer;
+	
+	@FXML
+	private Button BtnSup;
 	  
 	@FXML
 	private TextField TxtAbs;
@@ -45,6 +75,8 @@ public class Goban implements Initializable{
 	
 	@FXML
 	private ImageView ImgGoban;
+	
+	
 	
 	@FXML
 	private Circle CercleJoueur;
@@ -58,6 +90,27 @@ public class Goban implements Initializable{
 		
 	}
 	
+	
+	public void NewGame (ActionEvent event) {
+		Partie p=new Partie();
+	}
+	
+	public void OpenGame (ActionEvent event) {
+
+	}
+	public void SaveGame (ActionEvent event) {
+		p.SauvgarderPartie();
+		Info.setText("INFO : Partie Sauvgardée.");
+		
+	}
+	public void QuitGame (ActionEvent event) {
+		p.ChargerPartie();
+		Info.setText("INFO : Partie Chargée.");
+	}
+	public void AfficheInfo (ActionEvent event) {
+
+	}
+	
 	public void passerTour(ActionEvent event) {
 		p.passerTour();
 		if(CercleJoueur.getFill()==Color.BLACK) {
@@ -67,7 +120,12 @@ public class Goban implements Initializable{
 			CercleJoueur.setFill(Color.BLACK);
 		}
 		if(p.getjCourant().isaPasse()&&p.getjAttendant().isaPasse()) {
+
 			BtnPasser.setDisable(true);
+			BtnJouer.setDisable(true);
+			BtnSup.setDisable(false);
+			BtnSup.setVisible(true);	
+			Info.setText("INFO : Choisissez les pions morts\nà enlever.");
 		}
 		afficherPlateau(p.plateau);
 	}
@@ -75,17 +133,37 @@ public class Goban implements Initializable{
 	public void JouerTour (ActionEvent event) {
 		
 		System.out.println("ord "+TxtAbs.getText()+" abs "+TxtOrd.getText());
-		p.JouerTour(TxtAbs.getText(),TxtOrd.getText());
-		afficherPlateau(p.plateau);
-		if(CercleJoueur.getFill()==Color.BLACK) {
-			CercleJoueur.setFill(Color.WHITE);
+		int rep=p.JouerTour(TxtAbs.getText(),TxtOrd.getText());
+		switch (rep) {
+		case 1:
+			Info.setText("INFO : Vous avez jouer en \ndehors du plateau");			
+			break;		
+		case 2:
+			Info.setText("INFO : Vous avez jouer \ndans une case déjà occupée.");		
+			break;
+		case 3:
+			Info.setText("INFO : Vous ne pouvez pas jouer\nici c'est un coup suicidaire.");	
+			break;
+			
+		case 4:
+			afficherPlateau(p.plateau);
+			if(CercleJoueur.getFill()==Color.BLACK) {
+				CercleJoueur.setFill(Color.WHITE);
+			}
+			else {
+				CercleJoueur.setFill(Color.BLACK);
+			}
+			break;
+		default:
+			break;
 		}
-		else {
-			CercleJoueur.setFill(Color.BLACK);
-		}
+		
 	}
 	
-	
+	public void SupprPion (ActionEvent event) {
+
+	}
+		
 	
 	public void afficherPlateau(Plateau pl) {
 		AnchorPaneImg.getChildren().clear();
