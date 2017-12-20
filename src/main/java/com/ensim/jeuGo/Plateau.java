@@ -130,7 +130,9 @@ public class Plateau {
 				  
 			 if(contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleur)) {
 				  System.out.println("chaine du pion joué: "+contenuPlateau.get(ligne).get(colonne).chaine);
-				  if(contenuPlateau.get(ligne).get(colonne).chaine.equals(null)) {
+				  
+				  if(contenuPlateau.get(ligne).get(colonne).chaine==null) {
+					  
 					  contenuPlateau.get(ligne).get(colonne).chaine=contenuPlateau.get(ligne).get(colonne-1).chaine;
 					  contenuPlateau.get(ligne).get(colonne-1).chaine.intersectionsContenuesDsLaChaine.add(contenuPlateau.get(ligne).get(colonne));
 				  }
@@ -139,6 +141,7 @@ public class Plateau {
 					  contenuPlateau.get(ligne).get(colonne).chaine.intersectionsContenuesDsLaChaine.addAll(contenuPlateau.get(ligne).get(colonne-1).chaine.intersectionsContenuesDsLaChaine);
 					  for(Intersection i:contenuPlateau.get(ligne).get(colonne-1).chaine.intersectionsContenuesDsLaChaine) {
 						  i.chaine=contenuPlateau.get(ligne).get(colonne).chaine;
+						  listeChaines.remove(contenuPlateau.get(ligne).get(colonne-1).chaine);
 					  }//pour chaque pion de la chaine que l'on va supprimer, on dit sur quelle chaine ils vont maintenant pointer
 					  
 					  listeChaines.remove(contenuPlateau.get(ligne).get(colonne-1).chaine);
@@ -148,16 +151,36 @@ public class Plateau {
 						
 			  if(contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleur)) {
 				  
-				  contenuPlateau.get(ligne).get(colonne).chaine=contenuPlateau.get(ligne).get(colonne+1).chaine;
-				  contenuPlateau.get(ligne).get(colonne+1).chaine.intersectionsContenuesDsLaChaine.add(contenuPlateau.get(ligne).get(colonne));
+				  if(contenuPlateau.get(ligne).get(colonne).chaine==null) {
+					  contenuPlateau.get(ligne).get(colonne).chaine=contenuPlateau.get(ligne).get(colonne+1).chaine;
+					  contenuPlateau.get(ligne).get(colonne+1).chaine.intersectionsContenuesDsLaChaine.add(contenuPlateau.get(ligne).get(colonne));
+				  }
+				  else {
+					  contenuPlateau.get(ligne).get(colonne).chaine.intersectionsContenuesDsLaChaine.addAll(contenuPlateau.get(ligne).get(colonne+1).chaine.intersectionsContenuesDsLaChaine);
+					  for(Intersection i:contenuPlateau.get(ligne).get(colonne+1).chaine.intersectionsContenuesDsLaChaine) {
+						  i.chaine=contenuPlateau.get(ligne).get(colonne).chaine;
+						  listeChaines.remove(contenuPlateau.get(ligne).get(colonne+1).chaine);
+					  }
+				  }
 			  }
 				
 			  if(contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleur)) {
 				  
-				  contenuPlateau.get(ligne).get(colonne).chaine=contenuPlateau.get(ligne+1).get(colonne).chaine;
-				  contenuPlateau.get(ligne+1).get(colonne).chaine.intersectionsContenuesDsLaChaine.add(contenuPlateau.get(ligne).get(colonne));
+				  if(contenuPlateau.get(ligne).get(colonne).chaine==null) {
+					  contenuPlateau.get(ligne).get(colonne).chaine=contenuPlateau.get(ligne+1).get(colonne).chaine;
+					  contenuPlateau.get(ligne+1).get(colonne).chaine.intersectionsContenuesDsLaChaine.add(contenuPlateau.get(ligne).get(colonne));
+				  }
+				  else {
+					  contenuPlateau.get(ligne).get(colonne).chaine.intersectionsContenuesDsLaChaine.addAll(contenuPlateau.get(ligne+1).get(colonne).chaine.intersectionsContenuesDsLaChaine);
+					  for(Intersection i:contenuPlateau.get(ligne+1).get(colonne).chaine.intersectionsContenuesDsLaChaine) {
+						  i.chaine=contenuPlateau.get(ligne).get(colonne).chaine;
+						  listeChaines.remove(contenuPlateau.get(ligne+1).get(colonne).chaine);
+					  }
+				  }
 			  }
 			  
+			  System.out.println("liste chaines: "+listeChaines);
+			  System.out.println("liste pion: "+contenuPlateau.get(ligne).get(colonne).chaine.intersectionsContenuesDsLaChaine);
 			 			  
 			  
 			  //cas ou l'on trouve un voisin de la couleur adverse
@@ -242,8 +265,7 @@ public class Plateau {
 				  }
 			  }
 			 
-			 System.out.println("liste chaines: "+listeChaines);
-			 System.out.println("liste pion: "+contenuPlateau.get(ligne).get(colonne).chaine);
+			
 	}
 	
 	
@@ -258,7 +280,7 @@ public class Plateau {
 			 //on verifie la libertï¿½ du pion posï¿½
 			 
 			 contenuPlateau.get(ligne).get(colonne).libre=false;
-			 System.out.println("liberte pion pose:"+contenuPlateau.get(ligne).get(colonne).libre);
+			 
 		 }
 		 	
 		
@@ -269,7 +291,6 @@ public class Plateau {
 				 //on verifie la libertï¿½ du pion au dessus du pion posï¿½
 				 
 				 contenuPlateau.get(ligne-1).get(colonne).libre=false;
-				 System.out.println("liberte pion au dessus:"+contenuPlateau.get(ligne-1).get(colonne).libre);
 			 }
 		 }
 		 
@@ -279,7 +300,6 @@ public class Plateau {
 				//on verifie la libertï¿½ du pion a gauche du pion posï¿½
 						 
 				contenuPlateau.get(ligne).get(colonne-1).libre=false;
-				System.out.println("liberte pion gauche:"+contenuPlateau.get(ligne).get(colonne-1).libre);
 			 }
 		 }
 		 
@@ -289,7 +309,6 @@ public class Plateau {
 				//on verifie la libertï¿½ du pion en dessous du pion posï¿½
 								 
 					 contenuPlateau.get(ligne+1).get(colonne).libre=false;
-					 System.out.println("liberte pion dessous:"+contenuPlateau.get(ligne+1).get(colonne).libre);
 			 }
 		 }
 	
@@ -300,7 +319,6 @@ public class Plateau {
 				//on verifie la libertï¿½ du pion a droite du pion posï¿½
 										 
 					 contenuPlateau.get(ligne).get(colonne+1).libre=false;
-					 System.out.println("liberte pion droit:"+contenuPlateau.get(ligne).get(colonne+1).libre);
 			 }
 		 }
 	}
@@ -419,7 +437,6 @@ public class Plateau {
 		 
 		else renvoi=true;
 		 
-		if(!renvoi) System.out.println("tu peux pas jouer la car coup suicidaire");
 		return renvoi;
 		
 	}

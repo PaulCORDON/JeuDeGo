@@ -90,7 +90,7 @@ public class Partie {
 	}
 	
 	public int JouerTour(String abs,String ord){
-			System.out.println("coucou");
+			
 			int rep=4;
 			Integer ligne=new Integer(ord);
 			Integer colonne=new Integer(abs);		
