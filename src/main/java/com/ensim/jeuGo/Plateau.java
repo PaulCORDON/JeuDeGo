@@ -30,13 +30,13 @@ public class Plateau {
 	
 	
 	
-	public Boolean VerifCoupValide(Joueur j, int ligne,int colonne) {
+	public int VerifCoupValide(Joueur j, int ligne,int colonne) {
 		
 		String couleur= j.getCouleur();
 		String couleurAdverse=null;  
 		if(couleur.equals("blanc")) couleurAdverse="noir";
 		else if(couleur.equals("noir")) couleurAdverse="blanc";
-		Boolean renvoi=false;
+		int renvoi=4;
 			
 				  
 		
@@ -48,16 +48,17 @@ public class Plateau {
 				&& (contenuPlateau.get(ligne).get(colonne-1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne-1).contenu.equals("bord"))
 				&& (contenuPlateau.get(ligne).get(colonne+1).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne).get(colonne+1).contenu.equals("bord")) 
 				&&  (contenuPlateau.get(ligne+1).get(colonne).contenu.equals(couleurAdverse) || contenuPlateau.get(ligne+1).get(colonne).contenu.equals("bord"))) {
-						renvoi=false;
+						renvoi=3;
 						System.out.println("coup suicidaire pion entouré");
 				}//on verifie que le pion que l'on veut jouer n'est pas entoure par 4 pions adverses
 		
-			else if(CalculLiberteChaine(ligne, colonne, couleur)) renvoi=true;
+			else if(!CalculLiberteChaine(ligne, colonne, couleur)) renvoi=3;
+			
 			
 		
 		}
 		else {
-			renvoi=false;
+			renvoi=2;
 		}
 			
 		
