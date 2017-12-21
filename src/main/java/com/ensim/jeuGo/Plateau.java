@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Plateau {
 
 	public ArrayList<ArrayList<Intersection>> contenuPlateau= new ArrayList<ArrayList<Intersection>>();
-	public ArrayList<Chaine> listeChaines= new ArrayList<Chaine>();
+	
 	Partie p;
 	int tailleGrille=21;
 	
@@ -113,7 +113,6 @@ public class Plateau {
 				  //si le pion que l'on pose ne peut se rattacher a aucune chaine existante on en cree une nouvelle
 				 Chaine c= new Chaine(couleur);
 				 contenuPlateau.get(ligne).get(colonne).chaine=c;//la chaine du pion jou� est donc la chaine c
-				 listeChaines.add(c);
 				 c.intersectionsContenuesDsLaChaine.add(contenuPlateau.get(ligne).get(colonne));//on ajoute le pion a sa propre chaine
 				 
 			  }
@@ -141,10 +140,8 @@ public class Plateau {
 					  contenuPlateau.get(ligne).get(colonne).chaine.intersectionsContenuesDsLaChaine.addAll(contenuPlateau.get(ligne).get(colonne-1).chaine.intersectionsContenuesDsLaChaine);
 					  for(Intersection i:contenuPlateau.get(ligne).get(colonne-1).chaine.intersectionsContenuesDsLaChaine) {
 						  i.chaine=contenuPlateau.get(ligne).get(colonne).chaine;
-						  listeChaines.remove(contenuPlateau.get(ligne).get(colonne-1).chaine);
 					  }//pour chaque pion de la chaine que l'on va supprimer, on dit sur quelle chaine ils vont maintenant pointer
 					  
-					  listeChaines.remove(contenuPlateau.get(ligne).get(colonne-1).chaine);
 				  }
 				  
 			  }
@@ -159,7 +156,6 @@ public class Plateau {
 					  contenuPlateau.get(ligne).get(colonne).chaine.intersectionsContenuesDsLaChaine.addAll(contenuPlateau.get(ligne).get(colonne+1).chaine.intersectionsContenuesDsLaChaine);
 					  for(Intersection i:contenuPlateau.get(ligne).get(colonne+1).chaine.intersectionsContenuesDsLaChaine) {
 						  i.chaine=contenuPlateau.get(ligne).get(colonne).chaine;
-						  listeChaines.remove(contenuPlateau.get(ligne).get(colonne+1).chaine);
 					  }
 				  }
 			  }
@@ -174,7 +170,6 @@ public class Plateau {
 					  contenuPlateau.get(ligne).get(colonne).chaine.intersectionsContenuesDsLaChaine.addAll(contenuPlateau.get(ligne+1).get(colonne).chaine.intersectionsContenuesDsLaChaine);
 					  for(Intersection i:contenuPlateau.get(ligne+1).get(colonne).chaine.intersectionsContenuesDsLaChaine) {
 						  i.chaine=contenuPlateau.get(ligne).get(colonne).chaine;
-						  listeChaines.remove(contenuPlateau.get(ligne+1).get(colonne).chaine);
 					  }
 				  }
 			  }
@@ -199,7 +194,6 @@ public class Plateau {
 					  }
 					
 					 contenuPlateau.get(ligne-1).get(colonne).chaine=null;
-					 listeChaines.remove(contenuPlateau.get(ligne-1).get(colonne).chaine);
 					 
 					
 				  }
@@ -221,7 +215,6 @@ public class Plateau {
 					  }
 					
 					 contenuPlateau.get(ligne).get(colonne-1).chaine=null;
-					 listeChaines.remove(contenuPlateau.get(ligne-1).get(colonne).chaine);
 				  }
 			  }
 						
@@ -239,7 +232,6 @@ public class Plateau {
 					  }
 					
 					 contenuPlateau.get(ligne).get(colonne+1).chaine=null;
-					 listeChaines.remove(contenuPlateau.get(ligne-1).get(colonne).chaine);
 				  }
 				  
 			  }
@@ -258,7 +250,6 @@ public class Plateau {
 					  }
 					
 					 contenuPlateau.get(ligne).get(colonne+1).chaine=null;
-					 listeChaines.remove(contenuPlateau.get(ligne-1).get(colonne).chaine);
 				  }
 			  }
 			 
