@@ -30,7 +30,7 @@ public class Joueur {
 		this.aPasse = aPasse;
 	}
 
-	Joueur(String couleur){
+	public Joueur(String couleur){
 		this.couleur=couleur;
 	}
 	
