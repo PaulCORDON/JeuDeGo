@@ -460,12 +460,36 @@ public class Plateau {
 	}
 	
 	
-	public void SupprimerPion(int ligne, int colonne) {
+	public int SupprimerPion(String abs, String ord) {
 		/* methode utilisee a la fin de la partie pour supprimer les pions morts*/
+		int rep;
+		Integer ligne=new Integer(ord);
+		Integer colonne=new Integer(abs);
+		if(ligne<1||ligne>19||colonne<1||colonne>19) {
+			rep=1;
+		}
+		else {
+			contenuPlateau.get(ligne).get(colonne).contenu="vide";
+			rep=2;
+		}
 		
-		contenuPlateau.get(ligne).get(colonne).contenu="vide";
-		
+		return rep;
 	}
+	/*public int PlacerPion(String abs, String ord) {
+		 methode utilisee a la fin de la partie pour placer les pions dans les territoirs des joueurs
+		int rep;
+		Integer ligne=new Integer(ord);
+		Integer colonne=new Integer(abs);
+		if(ligne<1||ligne>19||colonne<1||colonne>19) {
+			rep=1;
+		}
+		else {
+			contenuPlateau.get(ligne).get(colonne).contenu="vide";
+			rep=2;
+		}
+		
+		return rep;
+	}*/
 }
 	
 	

@@ -96,8 +96,9 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="BtnSup" disable="true" layoutX="583.0" layoutY="135.0" mnemonicParsing="false" onAction="#SupprPion" text="Supprimer" visible="false" />
-                        <Button disable="true" layoutX="490.0" layoutY="262.0" mnemonicParsing="false" text="Calcul des scores" visible="false" />
+                        <Button fx:id="BtnSup" disable="true" layoutX="568.0" layoutY="135.0" mnemonicParsing="false" onAction="#SupprPion" text="Supprimer" visible="false" />
+                        <Button fx:id="BtnCalcScore" disable="true" layoutX="490.0" layoutY="262.0" mnemonicParsing="false" onAction="#CalculerScore" text="Calcul des scores" visible="false" />
+                        <Button fx:id="BtnPlacer" disable="true" layoutX="580.0" layoutY="162.0" mnemonicParsing="false" onAction="#PlacerPion" text="Placer" visible="false" />
                      </children>
                   </AnchorPane>
                </children>

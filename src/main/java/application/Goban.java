@@ -4,18 +4,17 @@ package application;
 
 
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
-import com.ensim.jeuGo.Intersection;
+
 import com.ensim.jeuGo.Partie;
 import com.ensim.jeuGo.Plateau;
-import com.sun.media.jfxmedia.logging.Logger;
+
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -24,7 +23,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.stage.PopupWindow.AnchorLocation;
 import javafx.scene.control.Menu;
 
 
@@ -66,6 +64,12 @@ public class Goban implements Initializable{
 	
 	@FXML
 	private Button BtnSup;
+	
+	@FXML
+	private Button BtnPlacer;
+	
+	@FXML
+	private Button BtnCalcScore;
 	  
 	@FXML
 	private TextField TxtAbs;
@@ -92,20 +96,23 @@ public class Goban implements Initializable{
 	
 	
 	public void NewGame (ActionEvent event) {
-		Partie p=new Partie();
+		//TODO lancer nouvelle partie
 	}
 	
 	public void OpenGame (ActionEvent event) {
-
+		p.ChargerPartie();
+		Info.setText("INFO : Partie Chargée.");
+		afficherPlateau(p.plateau);
+		
 	}
 	public void SaveGame (ActionEvent event) {
 		p.SauvgarderPartie();
 		Info.setText("INFO : Partie Sauvgardée.");
 		
+		
 	}
 	public void QuitGame (ActionEvent event) {
-		p.ChargerPartie();
-		Info.setText("INFO : Partie Chargée.");
+
 	}
 	public void AfficheInfo (ActionEvent event) {
 
@@ -125,6 +132,8 @@ public class Goban implements Initializable{
 			BtnJouer.setDisable(true);
 			BtnSup.setVisible(true);
 			BtnSup.setDisable(false);
+			BtnCalcScore.setVisible(true);
+			BtnCalcScore.setDisable(false);
 				
 			Info.setText("INFO : Choisissez les pions morts\nà enlever.");
 		}
@@ -162,7 +171,18 @@ public class Goban implements Initializable{
 	}
 	
 	public void SupprPion (ActionEvent event) {
-
+		int rep=p.plateau.SupprimerPion(TxtOrd.getText(),TxtAbs.getText());
+		switch (rep) {
+		case 1:
+			Info.setText("INFO : Vous avez entré des coordonée\nen dehors du plateau");			
+			break;		
+		case 2:
+			Info.setText("INFO : Vous avez bien supprimé le pion\nen ("+TxtAbs.getText()+", "+TxtOrd.getText()+")");	
+			afficherPlateau(p.plateau);
+			break;
+		default:
+			break;
+		}
 	}
 		
 	
@@ -182,4 +202,24 @@ public class Goban implements Initializable{
 			}
 		}
 	}
+	
+	public void CalculerScore() {
+		p.getJ1().setScore(p.CompterPoint(p.getJ1()));
+		p.getJ2().setScore(p.CompterPoint(p.getJ2()));
+			
+		if(p.getJ1().getScore()<p.getJ2().getScore()) {
+			Info.setText("SCORE : \tBlanc : "+p.getJ1().getScore()+"\n\t\tNoir : "+p.getJ2().getScore()+"\nLe vainqueur est noir");
+			CercleJoueur.setFill(Color.BLACK);
+		}
+		else {
+			Info.setText("SCORE : \tBlanc : "+p.getJ1().getScore()+"\n\t\tNoir : "+p.getJ2().getScore()+"\nLe vainqueur est blanc");
+			CercleJoueur.setFill(Color.WHITE);
+		}
+	}
+	public void PlacerPion() {
+		//TODO placer pion
+	}
+	
+	
+	
 }

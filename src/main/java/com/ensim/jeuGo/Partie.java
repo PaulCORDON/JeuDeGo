@@ -16,22 +16,47 @@ import org.apache.log4j.chainsaw.Main;
 
 import application.Goban;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 
 
 public class Partie {
+	
 	Logger logger = Logger . getLogger ( Main. class . getName ());
 
 	
 	Scanner sc = new Scanner(System.in);
-	Joueur j1;
-	Joueur j2;
-	private Joueur jCourant;
-	Label info;
+	private Joueur j1;
+	private Joueur j2;
+	private Joueur jCourant;	
 	private Joueur jAttendant;	
 	public Plateau plateau;
 	Boolean isFinish;
 	int tour;
+	
+	
+	
+	
+	public Joueur getJ1() {
+		return j1;
+	}
+
+
+	public void setJ1(Joueur j1) {
+		this.j1 = j1;
+	}
+
+
+	public Joueur getJ2() {
+		return j2;
+	}
+
+
+	public void setJ2(Joueur j2) {
+		this.j2 = j2;
+	}
+	
 	public Joueur getjAttendant() {
 		return jAttendant;
 	}
@@ -62,9 +87,7 @@ public class Partie {
 	}
 	
 	
-	public void JouerPartie() {
-			
-	}
+
 	
 	public void changerJoueur() {
 		logger.info("Le joueur courant change");
@@ -115,10 +138,19 @@ public class Partie {
 	
 	
 	
-	public int CompterPoint(Joueur j) {
-		int score=0;
-		
-		
+	public float CompterPoint(Joueur j) {
+		float score=0;
+		if(j==j2) {
+			score+=7.5;
+		}
+		for(int i=1;i<=19;i++) {
+			for(int k=1;k<=19;k++) {
+				if(plateau.contenuPlateau.get(i).get(k).getContenu().equals(j.getCouleur())){
+					score+=1;
+				}
+
+			}
+		}
 		
 		return score;
 	}

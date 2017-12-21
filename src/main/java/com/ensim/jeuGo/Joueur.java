@@ -3,7 +3,7 @@ package com.ensim.jeuGo;
 public class Joueur {
 	
 	private String couleur;
-	private int score;
+	private float score;
 	private boolean aPasse;
 	
 	public String getCouleur() {
@@ -14,11 +14,11 @@ public class Joueur {
 		this.couleur = couleur;
 	}
 
-	public int getScore() {
+	public float getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(float score) {
 		this.score = score;
 	}
 
