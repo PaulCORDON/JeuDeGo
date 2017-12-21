@@ -71,6 +71,7 @@ public class Plateau {
 	
 	
 	public String toString() {
+		/*methode permettant de jouer en console pour tester sans interface*/
 		String goban="";
 		for(ArrayList<Intersection> ligne:contenuPlateau) {
 			System.out.print("\n");
