@@ -457,6 +457,14 @@ public class Plateau {
 		return renvoi;
 		
 	}
+	
+	
+	public void SupprimerPion(int ligne, int colonne) {
+		/* methode utilisee a la fin de la partie pour supprimer les pions morts*/
+		
+		contenuPlateau.get(ligne).get(colonne).contenu="vide";
+		
+	}
 }
 	
 	
