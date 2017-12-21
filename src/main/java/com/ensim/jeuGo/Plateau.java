@@ -328,8 +328,12 @@ public class Plateau {
 			  ArrayList<Intersection> c=contenuPlateau.get(ligne-1).get(colonne).chaine.intersectionsContenuesDsLaChaine;
 			  Boolean b=false;
 			  
-			  
-			  
+			  if(contenuPlateau.get(ligne+1).get(colonne).contenu.equals("vide")||contenuPlateau.get(ligne).get(colonne-1).contenu.equals("vide") 
+					  || contenuPlateau.get(ligne).get(colonne+1).contenu.equals("vide")) {
+				  b=true;
+				  renvoi=true;
+			  }
+			  else {
 			  for(Intersection inter: c) {
 				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter!=contenuPlateau.get(ligne).get(colonne-1) && inter!=contenuPlateau.get(ligne+1).get(colonne) && inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
 				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
@@ -339,12 +343,13 @@ public class Plateau {
 						  b=true;
 						  renvoi=true;
 					  }
-					  if(ligne-1==1 && contenuPlateau.get(ligne).get(colonne).libre) {
+					  if(ligne==1 && contenuPlateau.get(ligne).get(colonne).libre) {
 						  b=true;
 						  renvoi=true;
 					  }
 					  
 				  }
+			  }
 			  }
 			  if(b.equals(false)) {
 				  					  
@@ -355,6 +360,12 @@ public class Plateau {
 			  
 			  ArrayList<Intersection> c=contenuPlateau.get(ligne+1).get(colonne).chaine.intersectionsContenuesDsLaChaine;
 			  Boolean b=false;
+			  if(contenuPlateau.get(ligne-1).get(colonne).contenu.equals("vide")||contenuPlateau.get(ligne).get(colonne-1).contenu.equals("vide") 
+					  || contenuPlateau.get(ligne).get(colonne+1).contenu.equals("vide")) {
+				  b=true;
+				  renvoi=true;
+			  }
+			  else {
 			  for(Intersection inter: c) {
 				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter!=contenuPlateau.get(ligne).get(colonne-1) && inter!=contenuPlateau.get(ligne+1).get(colonne) && inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
 				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
@@ -364,12 +375,13 @@ public class Plateau {
 					  b=true;
 					  renvoi=true;
 					  }
-					  if(ligne+1==tailleGrille-2 && contenuPlateau.get(ligne).get(colonne).libre) {
+					  if(ligne==tailleGrille-2 && contenuPlateau.get(ligne).get(colonne).libre) {
 						  b=true;
 						  renvoi=true;
 					  }
 				  }
 			  }
+		}
 			  if(b.equals(false)) {
 				  					  
 				  renvoi=false;	//si il n'y a pas d'autre liberte on ne peux pas jouer donc on retourne false
@@ -379,6 +391,12 @@ public class Plateau {
 			  
 			  ArrayList<Intersection> c=contenuPlateau.get(ligne).get(colonne-1).chaine.intersectionsContenuesDsLaChaine;
 			  Boolean b=false;
+			  if(contenuPlateau.get(ligne+1).get(colonne).contenu.equals("vide")||contenuPlateau.get(ligne+1).get(colonne).contenu.equals("vide") 
+					  || contenuPlateau.get(ligne).get(colonne+1).contenu.equals("vide")) {
+				  b=true;
+				  renvoi=true;
+			  }
+			  else {
 			  for(Intersection inter: c) {
 				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter!=contenuPlateau.get(ligne).get(colonne-1) && inter!=contenuPlateau.get(ligne+1).get(colonne) && inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
 				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
@@ -388,12 +406,13 @@ public class Plateau {
 						  b=true;
 						  renvoi=true;
 					  }
-					  if(colonne-1==1 && contenuPlateau.get(ligne).get(colonne).libre) {
+					  if(colonne==1 && contenuPlateau.get(ligne).get(colonne).libre) {
 						  b=true;
 						  renvoi=true;
 					  }
 					  
 				  }
+			  }
 			  }
 			  if(b.equals(false)) {
 				  					  
@@ -404,6 +423,12 @@ public class Plateau {
 			  
 			  ArrayList<Intersection> c=contenuPlateau.get(ligne).get(colonne+1).chaine.intersectionsContenuesDsLaChaine;
 			  Boolean b=false;
+			  if(contenuPlateau.get(ligne+1).get(colonne).contenu.equals("vide")||contenuPlateau.get(ligne).get(colonne-1).contenu.equals("vide") 
+					  || contenuPlateau.get(ligne-1).get(colonne).contenu.equals("vide")) {
+				  b=true;
+				  renvoi=true;
+			  }
+			  else {
 			  for(Intersection inter: c) {
 				  if(inter!=contenuPlateau.get(ligne).get(colonne+1) && inter!=contenuPlateau.get(ligne).get(colonne-1) && inter!=contenuPlateau.get(ligne+1).get(colonne) && inter!=contenuPlateau.get(ligne-1).get(colonne) && inter.libre && c.size()>1) b=true; renvoi=true;
 				  //si une intersection autre que celle d'a cote est libre la chaine reste libre donc le coup n'est pas suicidaire
@@ -414,11 +439,12 @@ public class Plateau {
 					  renvoi=true;
 					  }
 					  
-					  if(colonne+1==tailleGrille-2 && contenuPlateau.get(ligne).get(colonne).libre) {
+					  if(colonne==tailleGrille-2 && contenuPlateau.get(ligne).get(colonne).libre) {
 						  b=true;
 						  renvoi=true;
 					  }
 				  }
+			  }
 			  }
 			  if(b.equals(false)) {
 				  					  
