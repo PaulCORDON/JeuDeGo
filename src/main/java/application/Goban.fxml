@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,43 +14,21 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Goban">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Goban">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="File">
+        <Menu fx:id="MenuFile" mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="MenuNew" mnemonicParsing="false" onAction="#NewGame" text="New" />
+            <MenuItem fx:id="MenuOpen" mnemonicParsing="false" onAction="#OpenGame" text="Open…" />
+            <MenuItem fx:id="MenuSave" mnemonicParsing="false" onAction="#SaveGame" text="Save" />
+            <MenuItem fx:id="MenuQuit" mnemonicParsing="false" onAction="#QuitGame" text="Quit" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
+        <Menu fx:id="MenuInfo" mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem fx:id="MenuInformation" mnemonicParsing="false" text="A propos" />
           </items>
         </Menu>
       </menus>
@@ -64,11 +41,11 @@
                      <children>
                         <Button fx:id="BtnPasser" layoutX="518.0" layoutY="206.0" mnemonicParsing="false" onAction="#passerTour" text="Passer" />
                         <Text layoutX="536.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ou" />
-                        <TextField fx:id="TxtAbs" layoutX="476.0" layoutY="154.0" prefHeight="25.0" prefWidth="35.0" />
+                        <TextField fx:id="TxtAbs" layoutX="477.0" layoutY="125.0" prefHeight="25.0" prefWidth="35.0" />
                         <Text layoutX="453.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="abs" />
                         <Text layoutX="454.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ord" />
                         <Button fx:id="BtnJouer" layoutX="520.0" layoutY="135.0" mnemonicParsing="false" onAction="#JouerTour" text="Jouer" />
-                        <TextField fx:id="TxtOrd" layoutX="476.0" layoutY="125.0" prefHeight="25.0" prefWidth="35.0" />
+                        <TextField fx:id="TxtOrd" layoutX="477.0" layoutY="151.0" prefHeight="25.0" prefWidth="35.0" />
                         <Text layoutX="457.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C'est au tour de :" />
                         <Circle fx:id="CercleJoueur" layoutX="587.0" layoutY="46.0" radius="22.0" stroke="BLACK" strokeType="INSIDE" />
                         <Text layoutX="400.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
@@ -119,6 +96,8 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
+                        <Button fx:id="BtnSup" disable="true" layoutX="583.0" layoutY="135.0" mnemonicParsing="false" onAction="#SupprPion" text="Supprimer" visible="false" />
+                        <Button disable="true" layoutX="490.0" layoutY="262.0" mnemonicParsing="false" text="Calcul des scores" visible="false" />
                      </children>
                   </AnchorPane>
                </children>

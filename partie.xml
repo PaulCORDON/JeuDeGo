@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_131" class="java.beans.XMLDecoder">
+<java version="1.8.0_144" class="java.beans.XMLDecoder">
  <object class="com.ensim.jeuGo.Partie" id="Partie0">
   <void property="jAttendant">
    <void property="couleur">
@@ -17,7 +17,7 @@
  <void id="ArrayList0" method="get">
   <object class="com.ensim.jeuGo.Partie" field="plateau"/>
   <void id="ArrayList1" index="1">
-   <void id="Intersection0" index="1">
+   <void id="Intersection0" index="2">
     <void property="contenu">
      <string>noir</string>
     </void>

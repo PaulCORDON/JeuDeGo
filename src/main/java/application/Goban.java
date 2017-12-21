@@ -50,7 +50,7 @@ public class Goban implements Initializable{
 	public  MenuItem MenuQuit;
 	
 	@FXML
-	public Menu MenuInformation;
+	public MenuItem MenuInformation;
 	
 	@FXML
 	public  MenuItem MenuInfo;
@@ -123,8 +123,9 @@ public class Goban implements Initializable{
 
 			BtnPasser.setDisable(true);
 			BtnJouer.setDisable(true);
+			BtnSup.setVisible(true);
 			BtnSup.setDisable(false);
-			BtnSup.setVisible(true);	
+				
 			Info.setText("INFO : Choisissez les pions morts\nà enlever.");
 		}
 		afficherPlateau(p.plateau);
@@ -133,7 +134,7 @@ public class Goban implements Initializable{
 	public void JouerTour (ActionEvent event) {
 		
 		System.out.println("ord "+TxtAbs.getText()+" abs "+TxtOrd.getText());
-		int rep=p.JouerTour(TxtAbs.getText(),TxtOrd.getText());
+		int rep=p.JouerTour(TxtOrd.getText(),TxtAbs.getText());
 		switch (rep) {
 		case 1:
 			Info.setText("INFO : Vous avez jouer en \ndehors du plateau");			
