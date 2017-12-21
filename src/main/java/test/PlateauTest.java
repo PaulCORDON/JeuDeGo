@@ -66,16 +66,6 @@ public class PlateauTest{
 		 assertEquals("test capture pion 1", "vide", p.contenuPlateau.get(11).get(10).getContenu());
 		 assertEquals("test capture pion 2", "vide", p.contenuPlateau.get(12).get(10).getContenu());
 		 
-		 /*on verifie qu'on peut jouer un noir en 11,10*/
-		 assertEquals("test rejouer zone capturé 1", 4, p.VerifCoupValide(jNoir, 11, 10));
-		 p.contenuPlateau.get(11).get(10).setContenu("noir"); /*on ajoute le pion car il ne sajoute pas avec juste verifCoupValide*/
-
-		 /*on verifie qu'on peux jouer un noir en 12,10*/
-		 assertEquals("test rejouer zone capturé 2", 4, p.VerifCoupValide(jNoir, 12, 10));
-
-		 p.toString();
-		 
-		
-	 }
+		 }
 
 }
