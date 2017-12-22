@@ -146,7 +146,27 @@ public class Partie {
 			return rep;
 	}
 	
-	
+	/**
+	 * Méthode qui compte le nombre de pion du joueur j présent sur le plateau.
+	 * @param j
+	 * @return
+	 */
+	public float CompterPoint(Joueur j) {
+		float score=0;
+		if(j==j2) {
+			score+=7.5;
+		}
+		for(int i=1;i<=19;i++) {
+			for(int k=1;k<=19;k++) {
+				if(plateau.contenuPlateau.get(i).get(k).getContenu().equals(j.getCouleur())){
+					score+=1;
+				}
+
+			}
+		}
+		
+		return score;
+	}
 
 	/**
 	 * Méthode qui permet de sauvgarder la partie grace à la serialisation XML
