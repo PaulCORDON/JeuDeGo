@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_144" class="java.beans.XMLDecoder">
  <object class="com.ensim.jeuGo.Partie" id="Partie0">
+  <void id="Joueur0" property="j2"/>
   <void property="jAttendant">
-   <void property="couleur">
-    <string>noir</string>
-   </void>
+   <object idref="Joueur0"/>
   </void>
+  <void id="Joueur1" property="j1"/>
   <void property="jCourant">
-   <void property="couleur">
-    <string>blanc</string>
-   </void>
+   <object idref="Joueur1"/>
   </void>
  </object>
 <void class="com.ensim.jeuGo.Plateau" id="Field0" method="getField">
  <string>contenuPlateau</string>
  <void id="ArrayList0" method="get">
   <object class="com.ensim.jeuGo.Partie" field="plateau"/>
-  <void id="ArrayList1" index="1">
-   <void id="Intersection0" index="6">
+  <void id="ArrayList1" index="8">
+   <void id="Intersection0" index="7">
     <void property="contenu">
      <string>noir</string>
+    </void>
+   </void>
+  </void>
+  <void id="ArrayList2" index="9">
+   <void index="1">
+    <void property="contenu">
+     <string>noir</string>
+    </void>
+   </void>
+   <void index="7">
+    <void property="contenu">
+     <string>blanc</string>
     </void>
    </void>
   </void>

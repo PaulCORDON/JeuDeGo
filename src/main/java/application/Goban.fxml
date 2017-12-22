@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Goban">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Goban">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -96,9 +96,10 @@
                               </ImageView>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="BtnSup" disable="true" layoutX="568.0" layoutY="135.0" mnemonicParsing="false" onAction="#SupprPion" text="Supprimer" visible="false" />
+                        <Button fx:id="BtnSup" disable="true" layoutX="576.0" layoutY="138.0" mnemonicParsing="false" onAction="#SupprPion" text="Supprimer" visible="false" />
                         <Button fx:id="BtnCalcScore" disable="true" layoutX="490.0" layoutY="262.0" mnemonicParsing="false" onAction="#CalculerScore" text="Calcul des scores" visible="false" />
-                        <Button fx:id="BtnPlacer" disable="true" layoutX="580.0" layoutY="162.0" mnemonicParsing="false" onAction="#PlacerPion" text="Placer" visible="false" />
+                        <Button fx:id="BtnPlacern" disable="true" layoutX="576.0" layoutY="162.0" mnemonicParsing="false" onAction="#PlacerPionNoir" text="Placer pion noir" visible="false" />
+                        <Button fx:id="BtnPlacerb" disable="true" layoutX="576.0" layoutY="187.0" mnemonicParsing="false" onAction="#PlacerPionBlanc" text="Placer pion blanc" visible="false" />
                      </children>
                   </AnchorPane>
                </children>

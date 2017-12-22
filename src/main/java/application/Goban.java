@@ -66,7 +66,10 @@ public class Goban implements Initializable{
 	private Button BtnSup;
 	
 	@FXML
-	private Button BtnPlacer;
+	private Button BtnPlacern;
+	
+	@FXML
+	private Button BtnPlacerb;
 	
 	@FXML
 	private Button BtnCalcScore;
@@ -78,13 +81,10 @@ public class Goban implements Initializable{
 	private TextField TxtOrd;
 	
 	@FXML
-	private ImageView ImgGoban;
-	
-	
+	private ImageView ImgGoban;	
 	
 	@FXML
-	private Circle CercleJoueur;
-	
+	private Circle CercleJoueur;	
 	
 	@FXML
 	private AnchorPane AnchorPaneImg;
@@ -94,30 +94,62 @@ public class Goban implements Initializable{
 		
 	}
 	
-	
+	/**
+	 * Méthode qui permet de commencer une nouvelle partie 
+	 * en cliquant sur New dans le menu File de l'interface
+	 * @param event
+	 */
 	public void NewGame (ActionEvent event) {
 		//TODO lancer nouvelle partie
 	}
 	
+	/**
+	 * Méthode qui permet de charger la dernière partie sauvegardée
+	 * en cliquant sur Open dans le menu File de l'interface
+	 * @param event
+	 */
 	public void OpenGame (ActionEvent event) {
 		p.ChargerPartie();
 		Info.setText("INFO : Partie Chargée.");
 		afficherPlateau(p.plateau);
 		
 	}
+	/**
+	 * Méthode qui permet de sauvegarder la partie en cours
+	 * en cliquant sur Save dans le menu File de l'interface
+	 * @param event
+	 */
 	public void SaveGame (ActionEvent event) {
 		p.SauvgarderPartie();
 		Info.setText("INFO : Partie Sauvgardée.");
 		
-		
 	}
+	
+	/**
+	 *  Méthode qui permet de quitter la partie en cours
+	 *  en cliquant sur Quit dans le menu File de l'interface
+	 * @param event
+	 */
 	public void QuitGame (ActionEvent event) {
 
 	}
+	
+	/**
+	 *  Méthode qui permet d'afficher des information sur l'application
+	 *  en cliquant sur aPropos dans le menu Help de l'interface
+	 * @param event
+	 */
 	public void AfficheInfo (ActionEvent event) {
 
 	}
 	
+	
+	/**
+	 * Methode qui permet à un joueur de passer son tour
+	 * en cliquant sur le bouton Passer 
+	 * Si les deux joueurs passe leur tour la partie se termine.
+	 * @param event
+	 */
 	public void passerTour(ActionEvent event) {
 		p.passerTour();
 		if(CercleJoueur.getFill()==Color.BLACK) {
@@ -134,12 +166,21 @@ public class Goban implements Initializable{
 			BtnSup.setDisable(false);
 			BtnCalcScore.setVisible(true);
 			BtnCalcScore.setDisable(false);
+			BtnPlacerb.setVisible(true);
+			BtnPlacerb.setDisable(false);
+			BtnPlacern.setVisible(true);
+			BtnPlacern.setDisable(false);
 				
-			Info.setText("INFO : Choisissez les pions morts\nà enlever.");
+			Info.setText("INFO : Choisissez les pions morts\nà enlever.\nRemplissez vos territoire de pions");
 		}
 		afficherPlateau(p.plateau);
 	}
 	
+	
+	/**
+	 * Methode qui permet à un joueur de jouer en remplissant les deux TextField et en cliquant ensuite sur jouer.
+	 * @param event
+	 */
 	public void JouerTour (ActionEvent event) {
 		
 		System.out.println("ord "+TxtAbs.getText()+" abs "+TxtOrd.getText());
@@ -157,6 +198,7 @@ public class Goban implements Initializable{
 			
 		case 4:
 			afficherPlateau(p.plateau);
+			Info.setText("INFO : ");	
 			if(CercleJoueur.getFill()==Color.BLACK) {
 				CercleJoueur.setFill(Color.WHITE);
 			}
@@ -170,6 +212,11 @@ public class Goban implements Initializable{
 		
 	}
 	
+	/**
+	 * Méthode qui permet aux joueurs de supprimer les pions morts en fin de partie 
+	 * en remplissant les deux TextField et en cliquant ensuite sur Supprimer.
+	 * @param event
+	 */
 	public void SupprPion (ActionEvent event) {
 		int rep=p.plateau.SupprimerPion(TxtOrd.getText(),TxtAbs.getText());
 		switch (rep) {
@@ -185,7 +232,10 @@ public class Goban implements Initializable{
 		}
 	}
 		
-	
+	/**
+	 * Méthode qui permet d'afficher les pions sur le Goban de l'interface.
+	 * @param pl
+	 */
 	public void afficherPlateau(Plateau pl) {
 		AnchorPaneImg.getChildren().clear();
 		AnchorPaneImg.getChildren().add(ImgGoban);				
@@ -203,6 +253,9 @@ public class Goban implements Initializable{
 		}
 	}
 	
+	/**
+	 * Méthode qui calcul les scores des joueurs et qui affiche le vainqueur.
+	 */
 	public void CalculerScore() {
 		p.getJ1().setScore(p.CompterPoint(p.getJ1()));
 		p.getJ2().setScore(p.CompterPoint(p.getJ2()));
@@ -216,10 +269,37 @@ public class Goban implements Initializable{
 			CercleJoueur.setFill(Color.WHITE);
 		}
 	}
-	public void PlacerPion() {
-		//TODO placer pion
-	}
 	
+	/**
+	 * Méthode qui permet aux joueurs de placer des pions noir en fin de partie pour remplir les territoires noirs.
+	 */
+	public void PlacerPionNoir() {
+		int rep=p.plateau.PlacerPion(TxtOrd.getText(), TxtAbs.getText(), "noir");
+		if(rep==1) {
+			Info.setText("INFO : Vous avez jouer en \ndehors du plateau");
+		}
+		else if(rep==2) {
+			afficherPlateau(p.plateau);
+		}
+		else {
+			Info.setText("INFO : Veuillez supprimer le pion\ndéjà présent à cet endroit\navant d'en placer un ici.");
+		}
+	}
+	/**
+	 * Méthode qui permet aux joueurs de placer des pions noir en fin de partie pour remplir les territoires blancs
+	 */
+	public void PlacerPionBlanc() {
+		int rep=p.plateau.PlacerPion(TxtOrd.getText(), TxtAbs.getText(), "blanc");
+		if(rep==1) {
+			Info.setText("INFO : Vous avez jouer en \ndehors du plateau");
+		}
+		else if(rep==2){
+			afficherPlateau(p.plateau);
+		}
+		else {
+			Info.setText("INFO : Veuillez supprimer le pion\ndéjà présent à cet endroit\navant d'en placer un ici.");
+		}
+	}
 	
 	
 }

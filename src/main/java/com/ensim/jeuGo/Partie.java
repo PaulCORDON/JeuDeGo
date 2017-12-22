@@ -7,18 +7,10 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.chainsaw.Main;
-
-import application.Goban;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-
 
 
 public class Partie {
@@ -74,6 +66,10 @@ public class Partie {
 		this.jCourant = jCourant;
 	}
 	
+	
+	/**
+	 * Constructeur de la classe partie
+	 */
 	public Partie(){	//initialisation de la partie
 		logger.info ("La Partie commence.");
 		j1 = new Joueur("blanc");
@@ -88,7 +84,9 @@ public class Partie {
 	
 	
 
-	
+	/**
+	 * Methode qui change le joueur courant.
+	 */
 	public void changerJoueur() {
 		logger.info("Le joueur courant change");
 		if(jCourant==j1) {
@@ -100,6 +98,11 @@ public class Partie {
 			jAttendant=j2;
 		}
 	}
+	
+	/**
+	 * Méthode qui est déclanchée quand le joueur courant passe son tour et qui regarde
+	 * si le tour d'avant l'autre joueur n'a pas passé auquel cas la partie serait terminer.
+	 */
 	public void passerTour() {
 		jCourant.setaPasse(true);
 		if(jAttendant.isaPasse()==true) {
@@ -112,6 +115,13 @@ public class Partie {
 		
 	}
 	
+	/**
+	 * Méthode qui verifie si les coordonnées entrées par le joueur sont valides.
+	 * Si elles le sont elle place le pion.
+	 * @param abs
+	 * @param ord
+	 * @return un entier qui permetra à JouerTour de Goban.java de savoir si le coup est valdide ou non et pourquoi.
+	 */
 	public int JouerTour(String abs,String ord){
 			
 			int rep=4;
@@ -137,24 +147,10 @@ public class Partie {
 	}
 	
 	
-	
-	public float CompterPoint(Joueur j) {
-		float score=0;
-		if(j==j2) {
-			score+=7.5;
-		}
-		for(int i=1;i<=19;i++) {
-			for(int k=1;k<=19;k++) {
-				if(plateau.contenuPlateau.get(i).get(k).getContenu().equals(j.getCouleur())){
-					score+=1;
-				}
 
-			}
-		}
-		
-		return score;
-	}
-	
+	/**
+	 * Méthode qui permet de sauvgarder la partie grace à la serialisation XML
+	 */
 	public void SauvgarderPartie() {
 		XMLEncoder encoder = null;
 		try {
@@ -170,6 +166,9 @@ public class Partie {
 		    }
 		
 	}
+	/**
+	 * Méthode qui permet de charger la dernière partie sauvgardée grace à la serialisation XML
+	 */
 	public void ChargerPartie() {
 		 XMLDecoder decoder = null;
 		    try {

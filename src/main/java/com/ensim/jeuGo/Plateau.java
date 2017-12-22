@@ -475,21 +475,24 @@ public class Plateau {
 		
 		return rep;
 	}
-	/*public int PlacerPion(String abs, String ord) {
-		 methode utilisee a la fin de la partie pour placer les pions dans les territoirs des joueurs
+	public int PlacerPion(String abs, String ord,String couleur) {
+		 /*methode utilisee a la fin de la partie pour placer les pions dans les territoirs des joueurs*/
 		int rep;
 		Integer ligne=new Integer(ord);
 		Integer colonne=new Integer(abs);
 		if(ligne<1||ligne>19||colonne<1||colonne>19) {
 			rep=1;
 		}
-		else {
-			contenuPlateau.get(ligne).get(colonne).contenu="vide";
+		else if(contenuPlateau.get(ligne).get(colonne).contenu=="vide") {
+			contenuPlateau.get(ligne).get(colonne).contenu=couleur;
 			rep=2;
+		}
+		else {
+			rep=3;
 		}
 		
 		return rep;
-	}*/
+	}
 }
 	
 	
