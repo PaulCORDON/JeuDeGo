@@ -153,7 +153,7 @@ public class Partie {
 	 */
 	public float CompterPoint(Joueur j) {
 		float score=0;
-		if(j==j2) {
+		if(j==j1) {
 			score+=7.5;
 		}
 		for(int i=1;i<=19;i++) {
